@@ -9,6 +9,10 @@ module Kounta
 					Oj.load(File.read("#{Kounta.root}/spec/fixtures/#{filename}"))
 				end
 
+				def objects_from_response(klass, ids, reponses)
+					reponses.map {|response| klass.new(*ids, response) }
+				end
+
 			end
 		end
 	end

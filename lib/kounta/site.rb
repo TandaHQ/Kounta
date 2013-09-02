@@ -1,6 +1,6 @@
 module Kounta
 
-	class Category
+	class Site
 		attr_reader :company_id
 
 		def initialize(company_id, data)
@@ -16,12 +16,8 @@ module Kounta
 			@data["name"]
 		end
 
-		def description
-			@data["description"]
-		end
-
-		def products
-			
+		def code
+			@data["code"]
 		end
 
 	end

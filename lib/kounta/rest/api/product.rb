@@ -1,6 +1,6 @@
-require "kounta/rest/api/utils"
-require "kounta/category"
-require "kounta/product"
+require_relative "utils"
+require_relative "../../category"
+require_relative "../../product"
 
 module Kounta
 	module REST

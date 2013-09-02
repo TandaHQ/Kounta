@@ -1,5 +1,5 @@
-require "kounta/rest/client"
-require "kounta/version"
+require_relative "kounta/version"
+require_relative "kounta/rest/client"
 
 module Kounta
 	def self.root

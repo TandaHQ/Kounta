@@ -1,6 +1,6 @@
-require "kounta/rest/api/utils"
-require "kounta/category"
-require "kounta/product"
+require_relative "utils"
+require_relative "../../category"
+require_relative "../../product"
 
 module Kounta
 	module REST
@@ -8,12 +8,12 @@ module Kounta
 			module Category
 				include Kounta::REST::API::Utils
 
-				def categories
-					load_hash_from_file('categories.json').map { |response| Kounta::Category.new(response) }
+				def company_categories(company_id)
+					objects_from_response(Kounta::Category, [company_id], load_hash_from_file('categories.json'))
 				end
 
-				def category(id)
-					Kounta::Product.new load_hash_from_file('category.json')
+				def company_category(company_id, id)
+					Kounta::Category.new(company_id, load_hash_from_file('category.json'))
 				end
 
 			end

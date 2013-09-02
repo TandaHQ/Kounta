@@ -1,4 +1,4 @@
-require "kounta/rest/api/product"
+require_relative "rest/api/product"
 
 module Kounta
 
