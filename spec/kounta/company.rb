@@ -3,8 +3,7 @@ require "helper"
 describe Kounta::Company do
 
 	before do
-		@client = Kounta::REST::Client.new
-		@company = @client.company
+		@company = Kounta::Company.new
 	end
 
 	it "should have an id" do

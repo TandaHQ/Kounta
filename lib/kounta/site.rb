@@ -1,10 +1,8 @@
-require_relative "rest/api/product"
+require_relative "resource"
 
 module Kounta
 
-	class Site
-		include Kounta::REST::API::Product
-
+	class Site < Kounta::Resource
 		attr_reader :company_id
 
 		def initialize(company_id, data)
@@ -13,23 +11,23 @@ module Kounta
 		end
 
 		def id
-			@data["id"].to_i
+			@data[:id].to_i
 		end
 
 		def name
-			@data["name"]
+			@data[:name]
 		end
 
 		def code
-			@data["code"]
+			@data[:code]
 		end
 
 		def products
-			company_site_products(@company_id, id)
+			client.company_site_products(@company_id, id)
 		end
 
 		def product(product_id)
-			company_site_product(@company_id, id, product_id)
+			client.company_site_product(@company_id, id, product_id)
 		end
 
 	end

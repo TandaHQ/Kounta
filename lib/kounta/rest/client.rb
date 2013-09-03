@@ -12,6 +12,7 @@ module Kounta
 			include Kounta::REST::API::Site
 
 			def initialize
+
 			end
 
 		end

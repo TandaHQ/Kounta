@@ -6,7 +6,7 @@ module Kounta
 			module Utils
 
 				def load_hash_from_file(filename)
-					Oj.load(File.read("#{Kounta.root}/spec/fixtures/#{filename}"))
+					Oj.load(File.read("#{Kounta.root}/spec/fixtures/#{filename}"), symbol_keys: true)
 				end
 
 				def objects_from_response(klass, ids, reponses)

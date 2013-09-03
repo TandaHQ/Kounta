@@ -1,34 +1,40 @@
-require_relative "rest/api/category"
-require_relative "rest/api/site"
+require_relative "resource"
 
 module Kounta
 
-	class Company
-		include Kounta::REST::API::Category
-		include Kounta::REST::API::Site
+	class Company < Kounta::Resource
 
-		def initialize(data)
-			@data = data
+		# If we don't pass in data to the company, assume we mean the company associated with
+		# these oauth details.
+		# @data hash of company data
+		def initialize(data=nil)
+			@data = data ? data : client.company.to_h
 		end
 
 		def id
-			@data["id"].to_i
+			@data[:id].to_i
+		end
+
+		def to_h
+			{
+				id: id
+			}
 		end
 
 		def categories
-			company_categories(id)
+			client.company_categories(id)
 		end
 
 		def category(category_id)
-			company_category(id, category_id)
+			client.company_category(id, category_id)
 		end
 
 		def sites
-			company_sites(id)
+			client.company_sites(id)
 		end
 
 		def site(site_id)
-			company_site(id, site_id)
+			client.company_site(id, site_id)
 		end
 
 	end

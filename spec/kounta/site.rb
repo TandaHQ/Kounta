@@ -3,8 +3,7 @@ require "helper"
 describe Kounta::Site do
 
 	before do
-		@client = Kounta::REST::Client.new
-		@site = @client.company.site(985)
+		@site = Kounta::Company.new.site(985)
 	end
 
 	it "should have an id" do
@@ -22,6 +21,10 @@ describe Kounta::Site do
 	it "should have products" do
 		@site.products.length.should be(2)
 		@site.products.each {|product| product.should be_an_instance_of(Kounta::Product) }
+	end
+
+	it "should have a product" do
+		@site.product(985).should be_an_instance_of(Kounta::Product)
 	end
 
 end
