@@ -3,9 +3,12 @@ require_relative "rest/api/product"
 module Kounta
 
 	class Product
-		include Kounta::REST::API::Product
+		attr_reader :company_id
+		attr_reader :site_id
 
-		def initialize(data)
+		def initialize(company_id, site_id, data)
+			@company_id = company_id
+			@site_id = site_id
 			@data = data
 		end
 
@@ -38,7 +41,7 @@ module Kounta
 		end
 
 		def categories
-			product_categories(id)
+			company_product_categories(@company_id, id)
 		end
 
 	end

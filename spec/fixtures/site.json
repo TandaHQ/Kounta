@@ -1,12 +1,5 @@
-[
-  {
-    "id": 923,
-    "name": "Head Office",
-    "code": "NY-HO"
-  },
-  {
-    "id": 985,
-    "name": "Downtown",
-    "code": null
-  }
-]
+{
+"id": 985,
+"name": "Downtown",
+"code": "DT"
+}

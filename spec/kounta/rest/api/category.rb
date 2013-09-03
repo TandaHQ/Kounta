@@ -16,4 +16,10 @@ describe Kounta::REST::API::Category do
 		@client.company_category(1234, 567).should be_a Kounta::Category
 	end
 
+	it "should fetch categories a product belongs to" do
+		@client.company_product_categories(1234, 984).each { |category|
+			category.should be_a Kounta::Category
+		}
+	end
+
 end

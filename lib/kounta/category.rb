@@ -20,10 +20,6 @@ module Kounta
 			@data["description"]
 		end
 
-		def products
-			
-		end
-
 	end
 
 end

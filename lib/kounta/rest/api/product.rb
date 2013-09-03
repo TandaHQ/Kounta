@@ -8,16 +8,12 @@ module Kounta
 			module Product
 				include Kounta::REST::API::Utils
 
-				def products
-					load_hash_from_file('products.json').map { |response| Kounta::Product.new(response) }
+				def company_site_products(company_id, site_id)
+					objects_from_response(Kounta::Product, [company_id, site_id], load_hash_from_file('products.json'))
 				end
 
-				def product(product_id)
-					Kounta::Product.new load_hash_from_file('product.json')
-				end
-
-				def product_categories(product_id)
-					load_hash_from_file('categories.json').map { |response| Kounta::Category.new(response) }
+				def company_site_product(company_id, site_id, id)
+					Kounta::Product.new(company_id, site_id, load_hash_from_file('product.json'))
 				end
 
 			end

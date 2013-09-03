@@ -12,8 +12,12 @@ module Kounta
 					objects_from_response(Kounta::Category, [company_id], load_hash_from_file('categories.json'))
 				end
 
-				def company_category(company_id, id)
+				def company_category(company_id, category_id)
 					Kounta::Category.new(company_id, load_hash_from_file('category.json'))
+				end
+
+				def company_product_categories(company_id, product_id)
+					objects_from_response(Kounta::Category, [company_id], load_hash_from_file('product_categories.json'))
 				end
 
 			end
