@@ -17,6 +17,14 @@ module Kounta
 					end
 				end
 
+				def company_category(category_id)
+					Kounta::Company.new load_hash_from_file('category.json')
+				end
+
+				def company_product(product_id)
+					Kounta::Company.new load_hash_from_file('category.json')
+				end
+
 			end
 		end
 	end

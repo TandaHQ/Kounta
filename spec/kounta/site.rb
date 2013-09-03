@@ -27,4 +27,9 @@ describe Kounta::Site do
 		@site.product(985).should be_an_instance_of(Kounta::Product)
 	end
 
+	it "should have categories" do
+		@site.categories.length.should be(2)
+		@site.categories.each {|category| category.should be_an_instance_of(Kounta::Category) }
+	end
+
 end

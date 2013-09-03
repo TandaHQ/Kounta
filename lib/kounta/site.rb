@@ -30,6 +30,14 @@ module Kounta
 			client.company_site_product(@company_id, id, product_id)
 		end
 
+		def categories
+			client.company_site_categories(@company_id, id)
+		end
+
+		def category(category_id)
+			client.company_site_category(@company_id, id, category_id)
+		end
+
 	end
 
 end

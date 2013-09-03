@@ -7,7 +7,6 @@
     "barcode": "1234567890",
     "tags": [
       "Fresh Food",
-      "Website",
       "Organic"
     ]
   },
@@ -19,6 +18,7 @@
     "barcode": "0987654321",
     "tags": [
       "Fresh Food",
+      "Website",
       "Fragile"
     ]
   }
