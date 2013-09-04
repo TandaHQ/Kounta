@@ -17,7 +17,7 @@ module Kounta
 			@data[:name]
 		end
 
-		def products
+		def price_list_products
 			@data[:products].map { |price_list_product_data| PriceListProduct.new(price_list_product_data) }
 		end
 

@@ -12,6 +12,10 @@ module Kounta
 			@data[:id].to_i
 		end
 
+		def company_id
+			@data[:company_id].to_i
+		end
+
 		def name
 			@data[:name]
 		end
@@ -33,7 +37,7 @@ module Kounta
 		end
 
 		def categories
-			
+			client.objects_from_response(Kounta::Category, :get, {companies: company_id, products: id, categories: nil})
 		end
 
 	end
