@@ -44,10 +44,6 @@ module Kounta
 			client.object_from_response(Kounta::PriceList, :get, {companies: id, price_lists: 'base'})
 		end
 
-		def create_product(product_details)
-			client.object_from_response(Kounta::PriceList, :post, {companies: id, products: nil}, product_details)
-		end
-
 	end
 
 end
