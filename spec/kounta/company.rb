@@ -10,17 +10,15 @@ describe Kounta::Company do
 		@company.id.should be(2345)
 	end
 
-	it "should have categories" do
-		@company.categories.length.should be(2)
-		@company.categories.each {|category| category.should be_an_instance_of(Kounta::Category) }
-	end
-
 	it "should have a single category" do
 		@company.category(8263).should be_an_instance_of(Kounta::Category)
 	end
 
+	it "should have categories" do
+		@company.categories.each {|category| category.should be_an_instance_of(Kounta::Category) }
+	end
+
 	it "should have sites" do
-		@company.sites.length.should be(2)
 		@company.sites.each {|site| site.should be_an_instance_of(Kounta::Site) }
 	end
 
@@ -28,8 +26,16 @@ describe Kounta::Company do
 		@company.site(985).should be_an_instance_of(Kounta::Site)
 	end
 
+	it "should have price lists" do
+		@company.price_lists.each {|price_list| price_list.should be_an_instance_of(Kounta::PriceList) }
+	end
+
 	it "should have a price list" do
-		@company.price_list(285).should be_an_instance_of(Kounta::PriceList)
+		@company.price_list(236).should be_an_instance_of(Kounta::PriceList)
+	end
+
+	it "should have a base price list" do
+		@company.base_price_list.should be_an_instance_of(Kounta::PriceList)
 	end
 
 end

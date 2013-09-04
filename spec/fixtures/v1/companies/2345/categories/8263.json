@@ -1,0 +1,10 @@
+{
+  "id": 8263,
+  "name": "Fruit & Vegetables",
+  "description": "Fresh fruit and veg from local and imported sources",
+  "image": null,
+  "products": {
+    "count": 34,
+    "updated_at": "2013-05-29T15:22:32+10:00"
+  }
+}

@@ -3,12 +3,8 @@ require_relative "resource"
 module Kounta
 
 	class Product < Kounta::Resource
-		attr_reader :company_id
-		attr_reader :site_id
 
-		def initialize(company_id, site_id, data)
-			@company_id = company_id
-			@site_id = site_id
+		def initialize(data)
 			@data = data
 		end
 
@@ -37,7 +33,7 @@ module Kounta
 		end
 
 		def categories
-			client.company_product_categories(@company_id, id)
+			
 		end
 
 	end

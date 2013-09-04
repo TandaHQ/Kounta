@@ -1,0 +1,20 @@
+[
+  {
+    "id": 201,
+    "name": "Base Prices",
+    "parent_id": null,
+    "products": {
+      "count": 124,
+      "updated_at": "2013-06-14T16:11:28+10:00"
+    }
+  },
+  {
+    "id": 236,
+    "name": "VIP Prices",
+    "parent_id": 201,
+    "products": {
+      "count": 2,
+      "updated_at": "2013-06-14T16:14:08+10:00"
+    }
+  }
+]

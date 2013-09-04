@@ -3,10 +3,8 @@ require_relative "resource"
 module Kounta
 
 	class Site < Kounta::Resource
-		attr_reader :company_id
 
-		def initialize(company_id, data)
-			@company_id = company_id
+		def initialize(data)
 			@data = data
 		end
 

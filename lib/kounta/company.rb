@@ -4,11 +4,12 @@ module Kounta
 
 	class Company < Kounta::Resource
 
-		# If we don't pass in data to the company, assume we mean the company associated with
-		# these oauth details.
-		# @data hash of company data
 		def initialize(data=nil)
-			@data = data ? data : client.company.to_h
+			if data
+				@data = data
+			else
+				@data = client.perform({:companies => "me"}, :get)
+			end
 		end
 
 		def id
@@ -22,23 +23,31 @@ module Kounta
 		end
 
 		def categories
-			client.company_categories(id)
+			client.objects_from_response(Kounta::Category, :get, {companies: id, categories: nil})
 		end
 
 		def category(category_id)
-			client.company_category(id, category_id)
+			client.object_from_response(Kounta::Category, :get, {companies: id, categories: category_id})
 		end
 
 		def sites
-			client.company_sites(id)
+			client.objects_from_response(Kounta::Site, :get, {companies: id, sites: nil})
 		end
 
 		def site(site_id)
-			client.company_site(id, site_id)
+			client.object_from_response(Kounta::Site, :get, {companies: id, sites: site_id})
+		end
+
+		def price_lists
+			client.objects_from_response(Kounta::PriceList, :get, {companies: id, price_lists: nil})
 		end
 
 		def price_list(price_list_id)
-			client.price_list(id, price_list_id)
+			client.object_from_response(Kounta::PriceList, :get, {companies: id, price_lists: price_list_id})
+		end
+
+		def base_price_list
+			client.object_from_response(Kounta::PriceList, :get, {companies: id, price_lists: 'base'})
 		end
 
 	end

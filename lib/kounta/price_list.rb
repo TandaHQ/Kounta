@@ -4,9 +4,8 @@ require_relative "price_list_product"
 module Kounta
 
 	class PriceList < Kounta::Resource
-		attr_reader :company_id
 
-		def initialize(company_id, data)
+		def initialize(data)
 			@data = data
 		end
 
