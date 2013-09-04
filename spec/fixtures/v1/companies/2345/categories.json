@@ -18,5 +18,15 @@
       "count": 25,
       "updated_at": "2013-05-29T15:22:39+10:00"
     }
+  },
+  {
+    "id": 1111,
+    "name": "Third Category",
+    "description": "Some data about the third category",
+    "image": "https://my.kounta.com/images/673491736948276349.jpg",
+    "products": {
+      "count": 25,
+      "updated_at": "2013-05-29T15:22:39+10:00"
+    }
   }
 ]
