@@ -27,7 +27,6 @@ describe Kounta::Site do
 	end
 
 	it "should be able to return which categories it belongs to" do
-		@product.categories.length.should == 2
 		@product.categories.each {|category| category.should be_an_instance_of(Kounta::Category) }
 	end
 

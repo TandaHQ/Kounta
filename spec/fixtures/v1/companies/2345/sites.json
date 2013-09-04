@@ -1,10 +1,12 @@
 [
   {
+    "company_id": 2345,
     "id": 923,
     "name": "Head Office",
     "code": "NY-HO"
   },
   {
+    "company_id": 2345,
     "id": 985,
     "name": "Downtown",
     "code": null

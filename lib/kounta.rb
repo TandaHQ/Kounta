@@ -4,6 +4,7 @@ require_relative "kounta/company"
 require_relative "kounta/category"
 require_relative "kounta/site"
 require_relative "kounta/price_list"
+require_relative "kounta/product"
 
 module Kounta
 	def self.root

@@ -19,17 +19,23 @@ describe Kounta::Site do
 	end
 
 	it "should have products" do
-		@site.products.length.should be(2)
 		@site.products.each {|product| product.should be_an_instance_of(Kounta::Product) }
 	end
 
 	it "should have a product" do
-		@site.product(985).should be_an_instance_of(Kounta::Product)
+		@site.product(3274192).should be_an_instance_of(Kounta::Product)
 	end
 
 	it "should have categories" do
-		@site.categories.length.should be(2)
 		@site.categories.each {|category| category.should be_an_instance_of(Kounta::Category) }
+	end
+
+	it "should have a category" do
+		@site.category(8263).should be_an_instance_of(Kounta::Category)
+	end
+
+	it "should have a company" do
+		@site.company.should be_an_instance_of(Kounta::Company)
 	end
 
 end

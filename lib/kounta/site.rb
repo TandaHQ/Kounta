@@ -12,6 +12,10 @@ module Kounta
 			@data[:id].to_i
 		end
 
+		def company_id
+			@data[:company_id].to_i
+		end
+
 		def name
 			@data[:name]
 		end
@@ -21,23 +25,23 @@ module Kounta
 		end
 
 		def products
-			client.company_site_products(@company_id, id)
+			client.objects_from_response(Kounta::Product, :get, {companies: company_id, sites: id, products: nil})
 		end
 
 		def product(product_id)
-			client.company_site_product(@company_id, id, product_id)
+			client.object_from_response(Kounta::Product, :get, {companies: company_id, sites: id, products: product_id})
 		end
 
 		def categories
-			client.company_site_categories(@company_id, id)
+			client.objects_from_response(Kounta::Category, :get, {companies: company_id, sites: id, categories: nil})
 		end
 
 		def category(category_id)
-			client.company_site_category(@company_id, id, category_id)
+			client.object_from_response(Kounta::Category, :get, {companies: company_id, sites: id, categories: category_id})
 		end
 
 		def company
-			client.company(@company_id)
+			client.object_from_response(Kounta::Company, :get, {companies: company_id})
 		end
 
 	end
