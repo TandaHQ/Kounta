@@ -28,4 +28,8 @@ describe Kounta::Company do
 		@company.site(985).should be_an_instance_of(Kounta::Site)
 	end
 
+	it "should have a price list" do
+		@company.price_list(285).should be_an_instance_of(Kounta::PriceList)
+	end
+
 end

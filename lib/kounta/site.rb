@@ -38,6 +38,10 @@ module Kounta
 			client.company_site_category(@company_id, id, category_id)
 		end
 
+		def company
+			client.company(@company_id)
+		end
+
 	end
 
 end

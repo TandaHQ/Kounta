@@ -22,4 +22,8 @@ describe Kounta::REST::API::Category do
 		}
 	end
 
+	it "should get categories for a site" do
+		@client.company_site_category(1234, 34, 567).should be_a Kounta::Category
+	end
+
 end

@@ -1,0 +1,17 @@
+{
+  "id": 236,
+  "name": "VIP Prices",
+  "parent_id": 201,
+  "products": [
+    {
+      "id": 5510,
+      "name": "Cappuccino",
+      "unit_price": 1.25
+    },
+    {
+      "id": 6252,
+      "name": "Caffè Latte",
+      "unit_price": 1.45
+    }
+  ]
+}

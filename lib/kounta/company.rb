@@ -37,6 +37,10 @@ module Kounta
 			client.company_site(id, site_id)
 		end
 
+		def price_list(price_list_id)
+			client.price_list(id, price_list_id)
+		end
+
 	end
 
 end
