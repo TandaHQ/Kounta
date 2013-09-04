@@ -10,10 +10,6 @@ describe Kounta::Company do
 		@company.id.should be(2345)
 	end
 
-	it "should convert to a hash" do
-		@company.to_h.should be_an_instance_of(Hash)
-	end
-
 	it "should have a single category" do
 		@company.category(8263).should be_an_instance_of(Kounta::Category)
 	end

@@ -16,12 +16,6 @@ module Kounta
 			@data[:id].to_i
 		end
 
-		def to_h
-			{
-				id: id
-			}
-		end
-
 		def categories
 			client.objects_from_response(Kounta::Category, :get, {companies: id, categories: nil})
 		end
@@ -48,6 +42,10 @@ module Kounta
 
 		def base_price_list
 			client.object_from_response(Kounta::PriceList, :get, {companies: id, price_lists: 'base'})
+		end
+
+		def create_product(product_details)
+			client.object_from_response(Kounta::PriceList, :post, {companies: id, products: nil}, product_details)
 		end
 
 	end
