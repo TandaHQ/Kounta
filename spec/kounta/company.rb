@@ -18,11 +18,15 @@ describe Kounta::Company do
 		@company.categories.each {|category| category.should be_an_instance_of(Kounta::Category) }
 	end
 
+	it "should have a product" do
+		@company.product(3274192).should be_an_instance_of(Kounta::Product)
+	end
+
 	it "should have sites" do
 		@company.sites.each {|site| site.should be_an_instance_of(Kounta::Site) }
 	end
 
-	it "should have a single site" do
+	it "should have a site" do
 		@company.site(985).should be_an_instance_of(Kounta::Site)
 	end
 

@@ -24,6 +24,10 @@ module Kounta
 			client.object_from_response(Kounta::Category, :get, {companies: id, categories: category_id})
 		end
 
+		def product(product_id)
+			client.object_from_response(Kounta::Product, :get, {companies: id, products: product_id})
+		end
+
 		def sites
 			client.objects_from_response(Kounta::Site, :get, {companies: id, sites: nil})
 		end
