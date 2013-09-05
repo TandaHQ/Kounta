@@ -8,7 +8,7 @@ module Kounta
 			@data = data
 		end
 
-		def id
+		def product_id
 			@data[:id].to_i
 		end
 

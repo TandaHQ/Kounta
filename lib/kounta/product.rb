@@ -33,7 +33,7 @@ module Kounta
 		end
 
 		def tags_include?(name)
-			tags.include?(name)
+			tags.any?{ |s| s.casecmp(name) == 0 }
 		end
 
 		def categories

@@ -4,14 +4,49 @@
   "parent_id": 201,
   "products": [
     {
-      "id": 5510,
-      "name": "Cappuccino",
-      "unit_price": 1.25
+      "id": 1,
+      "name": "Test",
+      "unit_price": 10.25
     },
     {
-      "id": 6252,
+      "id": 2,
       "name": "Caffè Latte",
-      "unit_price": 1.45
+      "unit_price": 14.45
+    },
+    {
+      "id": 4,
+      "name": "Caffè Latte",
+      "unit_price": 13.15
+    },
+    {
+      "id": 5,
+      "name": "Caffè Latte",
+      "unit_price": 16.80
+    },
+    {
+      "id": 6,
+      "name": "Caffè Latte",
+      "unit_price": 8.90
+    },
+    {
+      "id": 7,
+      "name": "Caffè Latte",
+      "unit_price": 4.45
+    },
+    {
+      "id": 8,
+      "name": "Caffè Latte",
+      "unit_price": 10004.41
+    },
+    {
+      "id": 9,
+      "name": "Caffè Latte",
+      "unit_price": 999.99
+    },
+    {
+      "id": 10,
+      "name": "Caffè Latte",
+      "unit_price": 142.33
     }
   ]
 }
