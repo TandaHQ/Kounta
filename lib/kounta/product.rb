@@ -9,27 +9,27 @@ module Kounta
 		end
 
 		def id
-			@data[:id].to_i
+			@data['id'].to_i
 		end
 
 		def company_id
-			@data[:company_id].to_i
+			@data['company_id'].to_i
 		end
 
 		def name
-			@data[:name]
+			@data['name']
 		end
 
 		def code
-			@data[:code]
+			@data['code']
 		end
 
 		def description
-			@data[:description]
+			@data['description']
 		end
 
 		def tags
-			@data[:tags]
+			@data['tags']
 		end
 
 		def tags_include?(name)

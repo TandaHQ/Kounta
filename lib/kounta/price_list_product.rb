@@ -9,15 +9,15 @@ module Kounta
 		end
 
 		def product_id
-			@data[:id].to_i
+			@data['id'].to_i
 		end
 
 		def name
-			@data[:name]
+			@data['name']
 		end
 
 		def unit_price
-			@data[:unit_price].to_f
+			@data['unit_price'].to_f
 		end
 
 	end

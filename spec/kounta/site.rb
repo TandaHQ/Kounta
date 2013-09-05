@@ -11,11 +11,11 @@ describe Kounta::Site do
 	end
 
 	it "should have a name" do
-		@site.name.should eq("Downtown")
+		@site.name.should eq("Online Store")
 	end
 
 	it "should have a code" do
-		@site.code.should eq("DT")
+		@site.code.should eq("Online")
 	end
 
 	it "should have products" do
@@ -32,10 +32,6 @@ describe Kounta::Site do
 
 	it "should have a category" do
 		@site.category(8263).should be_an_instance_of(Kounta::Category)
-	end
-
-	it "should have a company" do
-		@site.company.should be_an_instance_of(Kounta::Company)
 	end
 
 end

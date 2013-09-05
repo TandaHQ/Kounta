@@ -9,15 +9,15 @@ module Kounta
 		end
 
 		def id
-			@data[:id].to_i
+			@data['id'].to_i
 		end
 
 		def name
-			@data[:name]
+			@data['name']
 		end
 
 		def description
-			@data[:description]
+			@data['description']
 		end
 
 	end

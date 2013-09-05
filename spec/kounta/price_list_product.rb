@@ -1,6 +1,6 @@
 require "helper"
 
-describe Kounta::PriceList do
+describe Kounta::PriceListProduct do
 
 	before do
 		@price_list_product = Kounta::Company.new.price_list(236).price_list_products.first

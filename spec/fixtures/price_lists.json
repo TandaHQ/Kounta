@@ -1,7 +1,7 @@
 [
   {
     "id": 201,
-    "name": "Base Prices",
+    "name": "Store Prices",
     "parent_id": null,
     "products": {
       "count": 124,
@@ -10,7 +10,7 @@
   },
   {
     "id": 236,
-    "name": "VIP Prices",
+    "name": "Online Prices",
     "parent_id": 201,
     "products": {
       "count": 2,

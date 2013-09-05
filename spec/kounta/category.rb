@@ -7,15 +7,15 @@ describe Kounta::Category do
 	end
 
 	it "should have an id" do
-		@category.id.should be(8263)
+		@category.id.should be(1)
 	end
 
 	it "should have a name" do
-		@category.name.should eq("Fruit & Vegetables")
+		@category.name.should eq("France")
 	end
 
 	it "should have a description" do
-		@category.description.should eq("Fresh fruit and veg from local and imported sources")
+		@category.description.should eq("Wine from the country of France")
 	end
 
 end

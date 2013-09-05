@@ -10,15 +10,15 @@ module Kounta
 		end
 
 		def id
-			@data[:id].to_i
+			@data['id'].to_i
 		end
 
 		def name
-			@data[:name]
+			@data['name']
 		end
 
 		def price_list_products
-			@data[:products].map { |price_list_product_data| PriceListProduct.new(price_list_product_data) }
+			@data['products'].map { |price_list_product_data| PriceListProduct.new(price_list_product_data) }
 		end
 
 	end

@@ -9,19 +9,19 @@ module Kounta
 		end
 
 		def id
-			@data[:id].to_i
+			@data['id'].to_i
 		end
 
 		def company_id
-			@data[:company_id].to_i
+			@data['company_id'].to_i
 		end
 
 		def name
-			@data[:name]
+			@data['name']
 		end
 
 		def code
-			@data[:code]
+			@data['code']
 		end
 
 		def products
@@ -38,10 +38,6 @@ module Kounta
 
 		def category(category_id)
 			client.object_from_response(Kounta::Category, :get, {companies: company_id, sites: id, categories: category_id})
-		end
-
-		def company
-			client.object_from_response(Kounta::Company, :get, {companies: company_id})
 		end
 
 	end

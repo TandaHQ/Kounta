@@ -22,6 +22,10 @@ describe Kounta::Company do
 		@company.product(3274192).should be_an_instance_of(Kounta::Product)
 	end
 
+	it "should have products" do
+		@company.products.each {|product| product.should be_an_instance_of(Kounta::Product) }
+	end
+
 	it "should have sites" do
 		@company.sites.each {|site| site.should be_an_instance_of(Kounta::Site) }
 	end
