@@ -27,4 +27,15 @@ describe Kounta::Product do
 		@product.categories.each {|category| category.should be_an_instance_of(Kounta::Category) }
 	end
 
+	it "should be able to save a product" do
+		@product.save!.should be_an_instance_of(Kounta::Product)
+		WebMock.should have_requested(:put, singular_endpoint('products'))
+	end
+
+	it "should be able to create a product" do
+		product = Kounta::Product.new({"company_id" => 1234, "name" => "New Product", "description" => "All about my new product", "tags" => ['Website', 'New']})
+		product.save!.should be_an_instance_of(Kounta::Product)
+		WebMock.should have_requested(:post, group_endpoint('products'))
+	end
+
 end
