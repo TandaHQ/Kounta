@@ -1,5 +1,3 @@
-require "oj"
-
 module Helpers
 
 	def company_me_endpoint
