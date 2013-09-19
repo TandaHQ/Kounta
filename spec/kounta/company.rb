@@ -10,7 +10,15 @@ describe Kounta::Company do
 		@company.id.should be(2345)
 	end
 
-	it "should have a single category" do
+	it "should have a customer" do
+		@company.customer(389427).should be_an_instance_of(Kounta::Customer)
+	end
+
+	it "should have customers" do
+		@company.customers.each {|customer| customer.should be_an_instance_of(Kounta::Customer) }
+	end
+
+	it "should have a category" do
 		@company.category(8263).should be_an_instance_of(Kounta::Category)
 	end
 
