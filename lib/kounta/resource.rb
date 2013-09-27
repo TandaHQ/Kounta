@@ -9,7 +9,8 @@ module Kounta
 		end
 
 		def save!
-			@data = new? ? client.perform(create_path, :post, to_hash) : client.perform(save_path, :put, to_hash)
+			raise Errors::IncompleteAttributes if missing_required_attributes?
+			@data = new? ? client.perform(resource_path, :post, to_hash) : client.perform(resource_path, :put, to_hash)
 			self
 		end
 

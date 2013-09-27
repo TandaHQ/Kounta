@@ -9,30 +9,41 @@ module Kounta
 		end
 
 		def id
-			@data['id'].to_i if @data['id']
+			@data['id'] ? @data['id'].to_i : nil
 		end
 
 		def company_id
-			@data['company_id'].to_i if @data['company_id']
+			@data['company_id'] ? @data['company_id'].to_i : nil
 		end
 
 		def name
 			@data['name']
 		end
 
+		def name= (value)
+			@data['name'] = value
+		end
+
 		def description
 			@data['description']
+		end
+
+		def description= (value)
+			@data['description'] = value
 		end
 
 		def tags
 			@data['tags']
 		end
 
+		def image
+			@data['image']
+		end
+
 		def to_hash
 			{
 				name: name,
-				description: description,
-				tags: tags
+				description: description
 			}
 		end
 
@@ -46,16 +57,12 @@ module Kounta
 
 		private
 
-		def required_ids
-			!!company_id
+		def missing_required_attributes?
+			!company_id
 		end
 
-		def save_path
+		def resource_path
 			{companies: company_id, products: id}
-		end
-
-		def create_path
-			{companies: company_id, products: nil}
 		end
 
 	end

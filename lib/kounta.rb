@@ -1,4 +1,5 @@
 require_relative "kounta/version"
+require_relative "kounta/errors"
 require_relative "kounta/rest/client"
 require_relative "kounta/company"
 require_relative "kounta/customer"

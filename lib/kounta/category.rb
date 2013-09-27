@@ -9,7 +9,7 @@ module Kounta
 		end
 
 		def id
-			@data['id'].to_i
+			@data['id'] ? @data['id'].to_i : nil
 		end
 
 		def name
