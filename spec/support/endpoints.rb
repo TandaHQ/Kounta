@@ -25,6 +25,7 @@ module Helpers
 		# create
 		stub_request(:post, group_endpoint('products')).to_return(:body => load_json_from_fixture('product.json'))
 		stub_request(:post, group_endpoint('customers')).to_return(:body => load_json_from_fixture('customer.json'))
+		stub_request(:post, group_endpoint('categories')).to_return(:body => load_json_from_fixture('category.json'))
 
 		# read
 		stub_request(:get, singular_endpoint('categories')).to_return(:body => load_json_from_fixture('category.json'))
@@ -43,6 +44,7 @@ module Helpers
 		# update
 		stub_request(:put, singular_endpoint('products')).to_return(:body => load_json_from_fixture('product.json'))
 		stub_request(:put, singular_endpoint('customers')).to_return(:body => load_json_from_fixture('customer.json'))
+		stub_request(:put, singular_endpoint('categories')).to_return(:body => load_json_from_fixture('category.json'))
 
 	end
 end
