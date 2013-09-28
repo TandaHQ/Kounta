@@ -55,7 +55,7 @@ module Kounta
 		end
 
 		def resource_path
-			{companies: company_id, customer: id}
+			{companies: company_id, customers: id}
 		end	
 
 	end
