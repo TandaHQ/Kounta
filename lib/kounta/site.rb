@@ -40,6 +40,14 @@ module Kounta
 			client.object_from_response(Kounta::Category, :get, {companies: company_id, sites: id, categories: category_id})
 		end
 
+		def addresses
+			client.objects_from_response(Kounta::Address, :get, {companies: company_id, sites: id, addresses: nil})
+		end
+
+		def address(address_id)
+			client.object_from_response(Kounta::Address, :get, {companies: company_id, sites: id, addresses: address_id})
+		end
+
 	end
 
 end
