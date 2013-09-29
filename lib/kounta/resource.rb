@@ -1,8 +1,18 @@
+require 'hashie'
 require_relative "rest/client"
 
 module Kounta
 
-	class Resource
+	class Resource < Hashie::Dash
+		include Hashie::Extensions::Coercion
+
+		property :id
+
+		def initialize(hash={})
+			hash.each_pair do |k,v|
+				self[k] = v
+			end
+		end
 
 		def client
 			@client ||= Kounta::REST::Client.new
