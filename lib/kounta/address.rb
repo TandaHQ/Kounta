@@ -3,8 +3,6 @@ require_relative "resource"
 module Kounta
 
 	class Address < Kounta::Resource
-		include Hashie::Extensions::Coercion
-
 		property :people_id, :required => true
 		property :lines
 		property :city
@@ -23,10 +21,6 @@ module Kounta
 		end
 
 		private
-
-		def missing_required_attributes?
-			!people_id
-		end
 
 		def resource_path
 			{people: people_id, addresses: id}

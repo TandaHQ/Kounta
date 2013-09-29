@@ -7,6 +7,8 @@ module Kounta
 		include Hashie::Extensions::Coercion
 
 		property :id
+		property :created_at
+		property :updated_at
 
 		def initialize(hash={})
 			hash.each_pair do |k,v|
@@ -19,8 +21,10 @@ module Kounta
 		end
 
 		def save!
-			raise Errors::IncompleteAttributes if missing_required_attributes?
-			@data = new? ? client.perform(resource_path, :post, to_hash) : client.perform(resource_path, :put, to_hash)
+			response = new? ? client.perform(resource_path, :post, to_hash) : client.perform(resource_path, :put, to_hash)
+			response.each_pair do |k,v|
+				self[k] = v
+			end
 			self
 		end
 

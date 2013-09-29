@@ -29,9 +29,4 @@ describe Kounta::Category do
 		WebMock.should have_requested(:post, group_endpoint('categories'))
 	end
 
-	it "should raise an error when saving without the required attributes" do
-		category = Kounta::Category.new({"name" => "New category", "description" => "All about my new category"})
-		expect { category.save! }.to raise_error Kounta::Errors::IncompleteAttributes
-	end
-
 end

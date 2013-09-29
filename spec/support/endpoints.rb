@@ -48,7 +48,7 @@ module Helpers
 		stub_request(:put, singular_endpoint('products')).to_return(:body => load_json_from_fixture('product.json'))
 		stub_request(:put, singular_endpoint('customers')).to_return(:body => load_json_from_fixture('customer.json'))
 		stub_request(:put, singular_endpoint('categories')).to_return(:body => load_json_from_fixture('category.json'))
-		stub_request(:put, singular_endpoint('addresses')).to_return(:body => load_json_from_fixture('addresses.json'))
+		stub_request(:put, singular_endpoint('addresses')).to_return(:body => load_json_from_fixture('address.json'))
 
 	end
 end

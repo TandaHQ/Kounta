@@ -39,9 +39,4 @@ describe Kounta::Address do
 		WebMock.should have_requested(:post, group_endpoint('addresses'))
 	end
 
-	it "should raise an error when saving without the required attributes" do
-		customer = Kounta::Customer.new({"lines" => ["Suite 5, Level 12", "44 Mutton Street"], "city" => "Melbourne", "zone" => "Victoria", "postal_code" => "3057", "country" => "Australia"})
-		expect { customer.save! }.to raise_error Kounta::Errors::IncompleteAttributes
-	end
-
 end

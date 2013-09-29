@@ -3,17 +3,25 @@ require_relative "resource"
 module Kounta
 
 	class Company < Kounta::Resource
+		property :name
+		property :shipping_address
+		property :postal_address
+		property :addresses
+		property :business_number
+		property :contact_staff_member
+		property :image
+		property :website
+		property :currency
+		property :timezone
+		property :sites
+		property :registers
 
-		def initialize(data=nil)
-			if data
-				@data = data
+		def initialize(hash={})
+			if hash.empty?
+				super(client.perform({:companies => "me"}, :get))
 			else
-				@data = client.perform({:companies => "me"}, :get)
+				super(hash)
 			end
-		end
-
-		def id
-			@data['id'] ? @data['id'].to_i : nil
 		end
 
 		def categories

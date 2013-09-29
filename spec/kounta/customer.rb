@@ -32,14 +32,8 @@ describe Kounta::Customer do
 	end
 
 	it "should be able to create a customer" do
-		customer = Kounta::Customer.new({"company_id" => 1234, "first_name" => "Sam", "last_name" => "Richardson", "email" => "sam@richardson.co.nz"})
+		customer = Kounta::Customer.new({"company_id" => 1234, "first_name" => "Sam", "last_name" => "Richardson", "primary_email_address" => "sam@richardson.co.nz"})
 		customer.save!.should be_an_instance_of(Kounta::Customer)
 		WebMock.should have_requested(:post, group_endpoint('customers'))
 	end
-
-	it "should raise an error when saving without the required attributes" do
-		customer = Kounta::Customer.new({"first_name" => "Sam", "last_name" => "Richardson", "email" => "sam@richardson.co.nz"})
-		expect { customer.save! }.to raise_error Kounta::Errors::IncompleteAttributes
-	end
-
 end
