@@ -36,16 +36,28 @@ module Kounta
 			"#{first_name} #{last_name}"
 		end
 
-		def email
+		def primary_email_address
 			@data['primary_email_address']
+		end
+
+		def primary_email_address= (value)
+			@data['primary_email_address'] = value
 		end
 
 		def to_hash
 			{
 				first_name: first_name,
 				last_name: last_name,
-				email: email
+				primary_email_address: primary_email_address
 			}
+		end
+
+		def addresses
+			client.objects_from_response(Kounta::Address, :get, {companies: company_id, customers: id, addresses: nil})
+		end
+
+		def address(address_id)
+			client.object_from_response(Kounta::Address, :get, {companies: company_id, customers: id, addresses: address_id})
 		end
 
 		private

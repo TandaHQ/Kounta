@@ -23,7 +23,7 @@ describe Kounta::Customer do
 	end
 
 	it "should have an email" do
-		@customer.email.should eq("sam@richardson.co.nz")
+		@customer.primary_email_address.should eq("sam@richardson.co.nz")
 	end
 
 	it "should be able to save a customer" do

@@ -26,12 +26,15 @@ module Helpers
 		stub_request(:post, group_endpoint('products')).to_return(:body => load_json_from_fixture('product.json'))
 		stub_request(:post, group_endpoint('customers')).to_return(:body => load_json_from_fixture('customer.json'))
 		stub_request(:post, group_endpoint('categories')).to_return(:body => load_json_from_fixture('category.json'))
+		stub_request(:post, group_endpoint('addresses')).to_return(:body => load_json_from_fixture('address.json'))
 
 		# read
 		stub_request(:get, singular_endpoint('categories')).to_return(:body => load_json_from_fixture('category.json'))
 		stub_request(:get, group_endpoint('categories')).to_return(:body => load_json_from_fixture('categories.json'))
 		stub_request(:get, singular_endpoint('customers')).to_return(:body => load_json_from_fixture('customer.json'))
 		stub_request(:get, group_endpoint('customers')).to_return(:body => load_json_from_fixture('customers.json'))
+		stub_request(:get, singular_endpoint('addresses')).to_return(:body => load_json_from_fixture('address.json'))
+		stub_request(:get, group_endpoint('addresses')).to_return(:body => load_json_from_fixture('addresses.json'))
 		stub_request(:get, singular_endpoint('products')).to_return(:body => load_json_from_fixture('product.json'))
 		stub_request(:get, group_endpoint('products')).to_return(:body => load_json_from_fixture('products.json'))
 		stub_request(:get, singular_endpoint('sites')).to_return(:body => load_json_from_fixture('site.json'))
@@ -45,6 +48,7 @@ module Helpers
 		stub_request(:put, singular_endpoint('products')).to_return(:body => load_json_from_fixture('product.json'))
 		stub_request(:put, singular_endpoint('customers')).to_return(:body => load_json_from_fixture('customer.json'))
 		stub_request(:put, singular_endpoint('categories')).to_return(:body => load_json_from_fixture('category.json'))
+		stub_request(:put, singular_endpoint('addresses')).to_return(:body => load_json_from_fixture('addresses.json'))
 
 	end
 end
