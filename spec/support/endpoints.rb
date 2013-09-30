@@ -43,6 +43,7 @@ module Helpers
 		stub_request(:get, group_endpoint('price_lists')).to_return(:body => load_json_from_fixture('price_lists.json'))
 		stub_request(:get, base_pricelist_endpoint).to_return(:body => load_json_from_fixture('price_list.json'))
 		stub_request(:get, company_me_endpoint).to_return(:body => load_json_from_fixture('companies_me.json'))
+		stub_request(:get, group_endpoint('taxes')).to_return(:body => load_json_from_fixture('taxes.json'))
 
 		# update
 		stub_request(:put, singular_endpoint('products')).to_return(:body => load_json_from_fixture('product.json'))

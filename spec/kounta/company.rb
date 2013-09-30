@@ -54,4 +54,8 @@ describe Kounta::Company do
 		@company.base_price_list.should be_an_instance_of(Kounta::PriceList)
 	end
 
+	it "should have taxes" do
+		@company.taxes.each {|tax| tax.should be_an_instance_of(Kounta::Tax) }
+	end
+
 end

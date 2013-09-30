@@ -3,6 +3,7 @@ require_relative "resource"
 module Kounta
 
 	class Company < Kounta::Resource
+
 		property :name
 		property :shipping_address
 		property :postal_address
@@ -66,6 +67,10 @@ module Kounta
 
 		def base_price_list
 			client.object_from_response(Kounta::PriceList, :get, {companies: id, price_lists: 'base'})
+		end
+
+		def taxes
+			client.objects_from_response(Kounta::Tax, :get, {companies: id, taxes: nil})
 		end
 
 	end

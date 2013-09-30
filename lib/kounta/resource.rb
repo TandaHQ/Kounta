@@ -16,6 +16,12 @@ module Kounta
 			end
 		end
 
+		def self.coerce(items)
+			items.map do |item|
+				self.new(item)
+			end
+		end
+
 		def client
 			@client ||= Kounta::REST::Client.new
 		end

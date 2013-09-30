@@ -3,26 +3,9 @@ require_relative "resource"
 module Kounta
 
 	class Site < Kounta::Resource
-
-		def initialize(data)
-			@data = data
-		end
-
-		def id
-			@data['id'] ? @data['id'].to_i : nil
-		end
-
-		def company_id
-			@data['company_id'] ? @data['company_id'].to_i : nil
-		end
-
-		def name
-			@data['name']
-		end
-
-		def code
-			@data['code']
-		end
+		property :company_id, :required => true
+		property :name
+		property :code
 
 		def products
 			client.objects_from_response(Kounta::Product, :get, {companies: company_id, sites: id, products: nil})

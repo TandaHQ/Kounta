@@ -1,44 +1,22 @@
 require_relative "resource"
+require_relative "tax"
 
 module Kounta
 
 	class Product < Kounta::Resource
+		property :company_id, :required => true
+		property :code
+		property :barcode
+		property :stock
+		property :name
+		property :description
+		property :tags
+		property :image
+		property :unit_price
+		property :cost_price
+		property :taxes
 
-		def initialize(data)
-			@data = data
-		end
-
-		def id
-			@data['id'] ? @data['id'].to_i : nil
-		end
-
-		def company_id
-			@data['company_id'] ? @data['company_id'].to_i : nil
-		end
-
-		def name
-			@data['name']
-		end
-
-		def name= (value)
-			@data['name'] = value
-		end
-
-		def description
-			@data['description']
-		end
-
-		def description= (value)
-			@data['description'] = value
-		end
-
-		def tags
-			@data['tags']
-		end
-
-		def image
-			@data['image']
-		end
+		coerce_key :taxes, Kounta::Tax
 
 		def to_hash
 			{

@@ -15,7 +15,7 @@ describe Kounta::PriceList do
 	end
 
 	it "should have price list products" do
-		@price_list.price_list_products.each {|price_list_product| price_list_product.should be_an_instance_of(Kounta::PriceListProduct) }
+		@price_list.products.each {|product| product.should be_an_instance_of(Kounta::Product) }
 	end
 
 end

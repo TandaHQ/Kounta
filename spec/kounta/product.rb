@@ -23,8 +23,8 @@ describe Kounta::Product do
 	end
 
 	it "should be able to to test for tags" do
-		@product.tags_include?("Fragile").should be(false)
-		@product.tags_include?("Website").should be(true)
+		@product.tags_include?("Rosebud").should be(false)
+		@product.tags_include?("Fragile").should be(true)
 	end
 
 	it "should be able to return which categories it belongs to" do
@@ -40,11 +40,6 @@ describe Kounta::Product do
 		product = Kounta::Product.new({"company_id" => 1234, "name" => "New Product", "description" => "All about my new product", "tags" => ['Website', 'New']})
 		product.save!.should be_an_instance_of(Kounta::Product)
 		WebMock.should have_requested(:post, group_endpoint('products'))
-	end
-
-	it "should raise an error when saving without the required attributes" do
-		product = Kounta::Product.new({"name" => "New Product", "description" => "All about my new product", "tags" => ['Website', 'New']})
-		expect { product.save! }.to raise_error Kounta::Errors::IncompleteAttributes
 	end
 
 end
