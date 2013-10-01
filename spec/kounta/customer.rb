@@ -2,32 +2,38 @@ require "helper"
 
 describe Kounta::Customer do
 
-	before do
-		@customer = Kounta::Company.new.customer(8263)
-	end
+	subject { Kounta::Company.new.customer(8263) }
 
 	it "should have an id" do
-		@customer.id.should be(389427)
+		subject.id.should be(389427)
 	end
 
 	it "should have a first name" do
-		@customer.first_name.should eq("Samuel")
+		subject.first_name.should eq("Samuel")
 	end
 
 	it "should have a last name" do
-		@customer.last_name.should eq("Richardson")
+		subject.last_name.should eq("Richardson")
 	end
 
 	it "should have a name" do
-		@customer.name.should eq("Samuel Richardson")
+		subject.name.should eq("Samuel Richardson")
 	end
 
 	it "should have an email" do
-		@customer.primary_email_address.should eq("sam@richardson.co.nz")
+		subject.primary_email_address.should eq("sam@richardson.co.nz")
+	end
+
+	it "should have addresses" do
+		subject.addresses.each {|address| address.should be_an_instance_of(Kounta::Address) }
+	end
+
+	it "should have an address" do
+		subject.address(8263).should be_an_instance_of(Kounta::Address)
 	end
 
 	it "should be able to save a customer" do
-		@customer.save!.should be_an_instance_of(Kounta::Customer)
+		subject.save!.should be_an_instance_of(Kounta::Customer)
 		WebMock.should have_requested(:put, singular_endpoint('customers'))
 	end
 
