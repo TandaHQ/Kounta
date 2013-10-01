@@ -34,4 +34,12 @@ describe Kounta::Site do
 		@site.category(8263).should be_an_instance_of(Kounta::Category)
 	end
 
+	it "should have addresses" do
+		@site.addresses.each {|address| address.should be_an_instance_of(Kounta::Address) }
+	end
+
+	it "should have an address" do
+		@site.address(8263).should be_an_instance_of(Kounta::Address)
+	end
+
 end

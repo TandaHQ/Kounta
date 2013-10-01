@@ -1,9 +1,14 @@
 require "helper"
+require 'oj'
 
 describe Kounta::Company do
 
 	before do
 		@company = Kounta::Company.new
+	end
+
+	it "should be able to create a company" do
+		Kounta::Company.new(Oj.load(File.read("#{Kounta.root}/spec/fixtures/companies_me.json")))
 	end
 
 	it "should have an id" do
