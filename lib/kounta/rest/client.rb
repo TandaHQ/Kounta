@@ -16,7 +16,6 @@ module Kounta
 				@conn = Faraday.new(:url => PATH) do |faraday|
 					faraday.request :url_encoded
 					faraday.response :json
-					faraday.response :logger
 					faraday.adapter Faraday.default_adapter
 				end
 			end

@@ -35,10 +35,6 @@ module Kounta
 
 		private
 
-		def missing_required_attributes?
-			!company_id
-		end
-
 		def resource_path
 			{companies: company_id, products: id}
 		end
