@@ -4,7 +4,7 @@ require_relative "tax"
 module Kounta
 
 	class Product < Kounta::Resource
-		property :company_id, :required => true
+		property :company_id
 		property :code
 		property :barcode
 		property :stock

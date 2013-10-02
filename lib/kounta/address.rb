@@ -3,12 +3,12 @@ require_relative "resource"
 module Kounta
 
 	class Address < Kounta::Resource
-		property :people_id, :required => true
+		property :people_id
 		property :lines
 		property :city
 		property :zone
-		property :postal_code, :required => true
-		property :country, :required => true
+		property :postal_code
+		property :country
 
 		def to_hash
 			{

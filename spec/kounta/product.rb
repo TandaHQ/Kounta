@@ -34,7 +34,7 @@ describe Kounta::Product do
 		WebMock.should have_requested(:put, singular_endpoint('products'))
 	end
 
-	it "should be able to create a product" do
+	it "should be able to create a product with a hash" do
 		product = Kounta::Product.new({"company_id" => 1234, "name" => "New Product", "description" => "All about my new product", "tags" => ['Website', 'New']})
 		product.save!.should be_an_instance_of(Kounta::Product)
 		WebMock.should have_requested(:post, group_endpoint('products'))

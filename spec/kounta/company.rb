@@ -37,6 +37,11 @@ describe Kounta::Company do
 		subject.products.each {|product| product.should be_an_instance_of(Kounta::Product) }
 	end
 
+	it "should be able to stub a product" do
+		subject.product(nil).should be_an_instance_of(Kounta::Product)
+		subject.product(nil).company_id.should be(2345)
+	end
+
 	it "should have sites" do
 		subject.sites.each {|site| site.should be_an_instance_of(Kounta::Site) }
 	end

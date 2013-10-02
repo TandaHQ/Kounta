@@ -3,8 +3,8 @@ require_relative "resource"
 module Kounta
 
 	class Customer < Kounta::Resource
-		property :company_id, :required => true
-		property :people_id, :required => true
+		property :company_id
+		property :people_id
 		property :first_name
 		property :last_name
 		property :primary_email_address
