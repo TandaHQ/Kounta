@@ -1,4 +1,5 @@
 require_relative "resource"
+require_relative "address"
 
 module Kounta
 
@@ -19,6 +20,9 @@ module Kounta
 		property :image
 		property :tags
 
+		has_one :address, Kounta::Address, {:company_id => :id}, lambda { |klass, item_id| {companies: klass.id, addresses: item_id} }
+		has_many :addresses, Kounta::Address, lambda { |klass| {companies: klass.id, addresses: nil} }
+
 		def name
 			"#{first_name} #{last_name}"
 		end
@@ -29,14 +33,6 @@ module Kounta
 				last_name: last_name,
 				primary_email_address: primary_email_address
 			}
-		end
-
-		def addresses
-			client.objects_from_response(Kounta::Address, :get, {companies: company_id, customers: id, addresses: nil})
-		end
-
-		def address(address_id)
-			client.object_from_response(Kounta::Address, :get, {companies: company_id, customers: id, addresses: address_id})
 		end
 
 		private

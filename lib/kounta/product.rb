@@ -1,5 +1,6 @@
 require_relative "resource"
 require_relative "tax"
+require_relative "category"
 
 module Kounta
 
@@ -16,6 +17,8 @@ module Kounta
 		property :cost_price
 		property :taxes
 
+		has_many :categories, Kounta::Category, lambda { |klass| {companies: klass.company_id, products: klass.id, categories: nil} }
+
 		coerce_key :taxes, Kounta::Tax
 
 		def to_hash
@@ -27,10 +30,6 @@ module Kounta
 
 		def tags_include?(name)
 			tags.any?{ |s| s.casecmp(name) == 0 }
-		end
-
-		def categories
-			client.objects_from_response(Kounta::Category, :get, {companies: company_id, products: id, categories: nil})
 		end
 
 		private

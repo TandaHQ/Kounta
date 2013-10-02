@@ -1,4 +1,7 @@
 require_relative "resource"
+require_relative "product"
+require_relative "category"
+require_relative "address"
 
 module Kounta
 
@@ -7,28 +10,16 @@ module Kounta
 		property :name
 		property :code
 
-		def products
-			client.objects_from_response(Kounta::Product, :get, {companies: company_id, sites: id, products: nil})
-		end
+		has_one :product, Kounta::Product, {:company_id => :id}, lambda { |klass, item_id| {companies: klass.company_id, sites: klass.id, products: item_id} }
+		has_one :category, Kounta::Category, {:company_id => :id}, lambda { |klass, item_id| {companies: klass.company_id, sites: klass.id, categories: item_id} }
+		has_one :address, Kounta::Address, {:company_id => :id}, lambda { |klass, item_id| {companies: klass.company_id, sites: klass.id, addresses: item_id} }
 
-		def product(product_id)
-			client.object_from_response(Kounta::Product, :get, {companies: company_id, sites: id, products: product_id})
-		end
+		has_many :products, Kounta::Product, lambda { |klass| {companies: klass.company_id, sites: klass.id, products: nil} }
+		has_many :categories, Kounta::Category, lambda { |klass| {companies: klass.company_id, sites: klass.id, categories: nil} }
+		has_many :addresses, Kounta::Address, lambda { |klass| {companies: klass.company_id, sites: klass.id, addresses: nil} }
 
-		def categories
-			client.objects_from_response(Kounta::Category, :get, {companies: company_id, sites: id, categories: nil})
-		end
-
-		def category(category_id)
-			client.object_from_response(Kounta::Category, :get, {companies: company_id, sites: id, categories: category_id})
-		end
-
-		def addresses
-			client.objects_from_response(Kounta::Address, :get, {companies: company_id, sites: id, addresses: nil})
-		end
-
-		def address(address_id)
-			client.object_from_response(Kounta::Address, :get, {companies: company_id, sites: id, addresses: address_id})
+		def resource_path
+			{companies: company_id, sites: id}
 		end
 
 	end

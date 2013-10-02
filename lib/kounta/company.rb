@@ -48,6 +48,10 @@ module Kounta
 			client.object_from_response(Kounta::PriceList, :get, {companies: id, price_lists: 'base'})
 		end
 
+		def resource_path
+			{companies: id}
+		end
+
 	end
 
 end

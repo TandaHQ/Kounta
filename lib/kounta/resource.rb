@@ -37,8 +37,10 @@ module Kounta
 		end
 
 		def initialize(hash={})
-			hash.each_pair do |k,v|
-				self[k] = v
+			if hash
+				hash.each_pair do |k,v|
+					self[k] = v
+				end
 			end
 		end
 
