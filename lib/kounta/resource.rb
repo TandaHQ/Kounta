@@ -56,10 +56,22 @@ module Kounta
 			self
 		end
 
+		def to_hash
+			{}.tap do |returning|
+				self.class.properties.each do |property|
+					returning[property] = self[property] unless ignored_properties.include?(property)
+				end
+			end
+		end
+
 		private
 
 		def new?
 			!id
+		end
+
+		def ignored_properties
+			[:created_at, :updated_at]
 		end
 
 	end

@@ -21,13 +21,6 @@ module Kounta
 
 		coerce_key :taxes, Kounta::Tax
 
-		def to_hash
-			{
-				name: name,
-				description: description
-			}
-		end
-
 		def tags_include?(name)
 			tags.any?{ |s| s.casecmp(name) == 0 }
 		end

@@ -27,6 +27,7 @@ module Helpers
 		stub_request(:post, group_endpoint('customers')).to_return(:body => load_json_from_fixture('customer.json'))
 		stub_request(:post, group_endpoint('categories')).to_return(:body => load_json_from_fixture('category.json'))
 		stub_request(:post, group_endpoint('addresses')).to_return(:body => load_json_from_fixture('address.json'))
+		stub_request(:post, group_endpoint('payments')).to_return(:body => load_json_from_fixture('payment.json'))
 
 		# read
 		stub_request(:get, singular_endpoint('categories')).to_return(:body => load_json_from_fixture('category.json'))
@@ -50,6 +51,7 @@ module Helpers
 		stub_request(:put, singular_endpoint('customers')).to_return(:body => load_json_from_fixture('customer.json'))
 		stub_request(:put, singular_endpoint('categories')).to_return(:body => load_json_from_fixture('category.json'))
 		stub_request(:put, singular_endpoint('addresses')).to_return(:body => load_json_from_fixture('address.json'))
+		stub_request(:put, singular_endpoint('payments')).to_return(:body => load_json_from_fixture('payment.json'))
 
 	end
 end

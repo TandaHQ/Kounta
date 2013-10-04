@@ -9,13 +9,6 @@ module Kounta
 		property :image
 		property :products
 
-		def to_hash
-			{
-				name: name,
-				description: description
-			}
-		end
-
 		private
 
 		def resource_path

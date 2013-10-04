@@ -27,14 +27,6 @@ module Kounta
 			"#{first_name} #{last_name}"
 		end
 
-		def to_hash
-			{
-				first_name: first_name,
-				last_name: last_name,
-				primary_email_address: primary_email_address
-			}
-		end
-
 		private
 
 		def resource_path
