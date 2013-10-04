@@ -1,8 +1,3 @@
-require_relative "resource"
-require_relative "product"
-require_relative "category"
-require_relative "address"
-
 module Kounta
 
 	class Site < Kounta::Resource

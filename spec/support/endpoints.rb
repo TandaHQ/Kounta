@@ -28,6 +28,8 @@ module Helpers
 		stub_request(:post, group_endpoint('categories')).to_return(:body => load_json_from_fixture('category.json'))
 		stub_request(:post, group_endpoint('addresses')).to_return(:body => load_json_from_fixture('address.json'))
 		stub_request(:post, group_endpoint('payments')).to_return(:body => load_json_from_fixture('payment.json'))
+		stub_request(:post, group_endpoint('lines')).to_return(:body => load_json_from_fixture('line.json'))
+		stub_request(:post, group_endpoint('orders')).to_return(:body => load_json_from_fixture('order.json'))
 
 		# read
 		stub_request(:get, singular_endpoint('categories')).to_return(:body => load_json_from_fixture('category.json'))
@@ -45,6 +47,8 @@ module Helpers
 		stub_request(:get, base_pricelist_endpoint).to_return(:body => load_json_from_fixture('price_list.json'))
 		stub_request(:get, company_me_endpoint).to_return(:body => load_json_from_fixture('companies_me.json'))
 		stub_request(:get, group_endpoint('taxes')).to_return(:body => load_json_from_fixture('taxes.json'))
+		stub_request(:get, singular_endpoint('orders')).to_return(:body => load_json_from_fixture('order.json'))
+		stub_request(:get, group_endpoint('orders')).to_return(:body => load_json_from_fixture('orders.json'))
 
 		# update
 		stub_request(:put, singular_endpoint('products')).to_return(:body => load_json_from_fixture('product.json'))
@@ -52,6 +56,8 @@ module Helpers
 		stub_request(:put, singular_endpoint('categories')).to_return(:body => load_json_from_fixture('category.json'))
 		stub_request(:put, singular_endpoint('addresses')).to_return(:body => load_json_from_fixture('address.json'))
 		stub_request(:put, singular_endpoint('payments')).to_return(:body => load_json_from_fixture('payment.json'))
+		stub_request(:put, singular_endpoint('lines')).to_return(:body => load_json_from_fixture('line.json'))
+		stub_request(:put, singular_endpoint('orders')).to_return(:body => load_json_from_fixture('order.json'))
 
 	end
 end

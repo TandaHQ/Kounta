@@ -1,7 +1,3 @@
-require_relative "resource"
-require_relative "tax"
-require_relative "category"
-
 module Kounta
 
 	class Product < Kounta::Resource
@@ -18,7 +14,6 @@ module Kounta
 		property :taxes
 
 		has_many :categories, Kounta::Category, lambda { |klass| {companies: klass.company_id, products: klass.id, categories: nil} }
-
 		coerce_key :taxes, Kounta::Tax
 
 		def tags_include?(name)

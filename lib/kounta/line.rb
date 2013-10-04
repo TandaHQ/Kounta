@@ -4,6 +4,7 @@ module Kounta
 		property :company_id
 		property :order_id
 		property :product_id
+		property :number
 		property :quantity
 		property :notes
 		property :price_variation

@@ -42,4 +42,9 @@ describe Kounta::Customer do
 		customer.save!.should be_an_instance_of(Kounta::Customer)
 		WebMock.should have_requested(:post, group_endpoint('customers'))
 	end
+
+	it "should have orders" do
+		subject.orders.each {|order| order.should be_an_instance_of(Kounta::Order) }
+	end
+
 end

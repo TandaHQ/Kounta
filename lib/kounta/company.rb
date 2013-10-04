@@ -1,11 +1,3 @@
-require_relative "resource"
-require_relative "product"
-require_relative "category"
-require_relative "customer"
-require_relative "site"
-require_relative "price_list"
-require_relative "tax"
-
 module Kounta
 
 	class Company < Kounta::Resource

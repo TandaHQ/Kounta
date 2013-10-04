@@ -56,12 +56,12 @@ module Kounta
 			self
 		end
 
-		def to_hash
+		def to_hash(hash={})
 			{}.tap do |returning|
 				self.class.properties.each do |property|
 					returning[property] = self[property] unless ignored_properties.include?(property)
 				end
-			end
+			end.merge(hash)
 		end
 
 		private
@@ -70,8 +70,8 @@ module Kounta
 			!id
 		end
 
-		def ignored_properties
-			[:created_at, :updated_at]
+		def ignored_properties(array=[])
+			array << [:created_at, :updated_at]
 		end
 
 	end

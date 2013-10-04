@@ -1,9 +1,7 @@
-require_relative "resource"
-
 module Kounta
 
 	class Category < Kounta::Resource
-		property :company_id, :required => true
+		property :company_id
 		property :name
 		property :description
 		property :image

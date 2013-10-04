@@ -1,6 +1,3 @@
-require_relative "resource"
-require_relative "address"
-
 module Kounta
 
 	class Customer < Kounta::Resource
@@ -22,6 +19,7 @@ module Kounta
 
 		has_one :address, Kounta::Address, {:company_id => :id}, lambda { |klass, item_id| {companies: klass.id, addresses: item_id} }
 		has_many :addresses, Kounta::Address, lambda { |klass| {companies: klass.id, addresses: nil} }
+		has_many :orders, Kounta::Order, lambda { |klass| {companies: klass.id, orders: nil} }
 
 		def name
 			"#{first_name} #{last_name}"

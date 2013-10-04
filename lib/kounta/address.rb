@@ -1,5 +1,3 @@
-require_relative "resource"
-
 module Kounta
 
 	class Address < Kounta::Resource

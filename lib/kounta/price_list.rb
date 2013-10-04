@@ -1,6 +1,3 @@
-require_relative "resource"
-require_relative "product"
-
 module Kounta
 
 	class PriceList < Kounta::Resource
