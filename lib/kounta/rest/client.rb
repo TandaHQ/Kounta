@@ -20,20 +20,20 @@ module Kounta
 				end
 			end
 
-			def objects_from_response(klass, request_method, url_hash, options={})
-				perform(url_hash, request_method, options).map { |response| klass.new(response) }
-			end
-
-			def object_from_response(klass, request_method, url_hash, options={})
-				klass.new( perform(url_hash, request_method, options) )
+			def path_from_hash(url_hash)
+				url_hash.map{ |key, value| value ? "#{key}/#{value}" : "#{key}" }.join('/')
 			end
 
 			def perform(url_hash, request_method, options={})
 				@conn.send(request_method.to_sym, "#{path_from_hash(url_hash)}.#{FORMAT}", options).body
 			end
 
-			def path_from_hash(url_hash)
-				url_hash.map{ |key, value| value ? "#{key}/#{value}" : "#{key}" }.join('/')
+			def objects_from_response(klass, request_method, url_hash, options={})
+				perform(url_hash, request_method, options).map { |response| klass.new(response) }
+			end
+
+			def object_from_response(klass, request_method, url_hash, options={})
+				klass.new( perform(url_hash, request_method, options) )
 			end
 
 		end
