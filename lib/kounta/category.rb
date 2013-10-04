@@ -7,8 +7,6 @@ module Kounta
 		property :image
 		property :products
 
-		private
-
 		def resource_path
 			{companies: company_id, categories: id}
 		end		

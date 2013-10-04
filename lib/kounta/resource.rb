@@ -17,7 +17,7 @@ module Kounta
 		end
 
 		def self.has_one(sym, klass, assignments, route)
-			define_method(sym) do |item_id|
+			define_method(sym) do |item_id=nil|
 				if item_id
 					client.object_from_response(klass, :get, route.call(self, item_id))
 				else
@@ -48,6 +48,15 @@ module Kounta
 			@client ||= Kounta::REST::Client.new
 		end
 
+		def to_hash(hash={})
+			{}.tap do |returning|
+				self.class.properties.each do |property|
+					next if ignored_properties.include?(property)
+					returning[property] = self[property]
+				end
+			end.merge(hash)
+		end
+
 		def save!
 			response = new? ? client.perform(resource_path, :post, to_hash) : client.perform(resource_path, :put, to_hash)
 			response.each_pair do |k,v|
@@ -56,22 +65,12 @@ module Kounta
 			self
 		end
 
-		def to_hash(hash={})
-			{}.tap do |returning|
-				self.class.properties.each do |property|
-					returning[property] = self[property] unless ignored_properties.include?(property)
-				end
-			end.merge(hash)
-		end
-
-		private
-
 		def new?
 			!id
 		end
 
 		def ignored_properties(array=[])
-			array << [:created_at, :updated_at]
+			array + [:created_at, :updated_at]
 		end
 
 	end

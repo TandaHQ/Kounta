@@ -20,8 +20,6 @@ module Kounta
 			tags.any?{ |s| s.casecmp(name) == 0 }
 		end
 
-		private
-
 		def resource_path
 			{companies: company_id, products: id}
 		end

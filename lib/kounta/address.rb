@@ -9,8 +9,6 @@ module Kounta
 		property :postal_code
 		property :country
 
-		private
-
 		def resource_path
 			{people: people_id, addresses: id}
 		end

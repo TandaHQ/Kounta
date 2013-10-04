@@ -40,8 +40,6 @@ module Kounta
 			})
 		end
 
-		private
-
 		def resource_path
 			{companies: company_id, orders: id}
 		end

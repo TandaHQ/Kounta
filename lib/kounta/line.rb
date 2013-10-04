@@ -9,8 +9,6 @@ module Kounta
 		property :notes
 		property :price_variation
 
-		private
-
 		def resource_path
 			{companies: company_id, orders: order_id, lines: id}
 		end
