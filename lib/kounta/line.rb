@@ -8,6 +8,11 @@ module Kounta
 		property :quantity
 		property :notes
 		property :price_variation
+		property :product
+		property :unit_price
+		property :unit_tax
+
+		coerce_key :product, Kounta::Product
 
 		def resource_path
 			{companies: company_id, orders: order_id, lines: id}

@@ -7,30 +7,22 @@ module Kounta
 		property :register_id
 		property :site_id
 		property :lines
+		property :payments
 		property :callback_uri
 		property :placed_at
 		property :fulfil_at
 		property :notes
 		property :total
 		property :paid
+		property :product
 
 		coerce_key :lines, Kounta::Line
 		coerce_key :payments, Kounta::Payment
 
-		def payments
-			@payments ||= []
-		end
-
-		def payments= (value)
-			@payments = value
-		end
-
-		def lines
-			@lines ||= []
-		end
-
-		def lines= (value)
-			@lines = value
+		def initialize(hash={})
+			super(hash)
+			self.payments ||= []
+			self.lines ||= []
 		end
 
 		def to_hash

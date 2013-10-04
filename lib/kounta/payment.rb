@@ -6,6 +6,7 @@ module Kounta
 		property :method_id
 		property :amount
 		property :ref
+		property :method
 
 		def resource_path
 			{companies: company_id, orders: order_id, payments: id}

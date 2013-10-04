@@ -10,9 +10,11 @@ module Kounta
 		property :created_at
 		property :updated_at
 
-		def self.coerce(items)
-			items.map do |item|
-				self.new(item)
+		def self.coerce(data)
+			if data.kind_of? Array
+				data.map { |item| self.new(item) }
+			else
+				self.new(data)
 			end
 		end
 
@@ -21,11 +23,11 @@ module Kounta
 				if item_id
 					client.object_from_response(klass, :get, route.call(self, item_id))
 				else
-					product = klass.new
+					instance = klass.new
 					assignments.each_pair do |k,v|
-						product[k] = self[v]
+						instance[k] = self[v]
 					end
-					product
+					instance
 				end
 			end
 		end
