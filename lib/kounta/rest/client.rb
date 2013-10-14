@@ -1,24 +1,26 @@
 require 'faraday'
 require 'faraday_middleware'
+require 'oauth2'
+require 'base64'
+require 'oj'
 
 module Kounta
 	module REST
 		class Client
 
-			API = "https://api.kounta.com/v1"
-			FORMAT = :json
-
 			def initialize
-				raise Kounta::Errors::MissingOauthDetails unless Kounta.oauth_client_token
+				raise Kounta::Errors::MissingOauthDetails unless has_required_oauth_details?
+				@conn = OAuth2::AccessToken.new(oauth_client, Kounta.client_token)
+			end
 
-				@conn = Faraday.new(:url => API) do |faraday|
-					faraday.request :url_encoded
-					faraday.request :oauth2, Kounta.oauth_client_token
-					faraday.response :logger
-					faraday.response FORMAT
-					faraday.adapter Faraday.default_adapter
-				end
-
+			def oauth_client
+				@oauth_client ||= OAuth2::Client.new(
+					Kounta.client_id,
+					Kounta.client_secret,
+					:site => Kounta::SITE_URI,
+					:authorize_url => Kounta::AUTHORIZATION_URI,
+					:token_url => Kounta::TOKEN_URI
+				)
 			end
 
 			def path_from_hash(url_hash)
@@ -26,7 +28,14 @@ module Kounta
 			end
 
 			def perform(url_hash, request_method, options={})
-				response = @conn.send(request_method.to_sym, "#{path_from_hash(url_hash)}.#{FORMAT.to_s}", options)
+				begin
+					response = @conn.send(request_method.to_sym, "#{path_from_hash(url_hash)}.#{FORMAT.to_s}", options)
+				rescue OAuth2::Error => ex
+					if ex.message.include? 'The access token provided has expired'
+						@conn.refresh! 
+						retry
+					end
+				end
 				raise Kounta::Errors::APIError, response.body['error_description'] if response.status != 200 && response.status != 201
 				response.body
 			end
@@ -38,6 +47,12 @@ module Kounta
 			def object_from_response(klass, request_method, url_hash, options={})
 				klass.new( perform(url_hash, request_method, options) )
 			end
+
+			private
+
+				def has_required_oauth_details?
+					Kounta.client_id && Kounta.client_secret && Kounta.client_token
+				end
 
 		end
 	end

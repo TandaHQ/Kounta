@@ -39,6 +39,8 @@ module Kounta
 		end
 
 		def initialize(hash={})
+			puts "--- incoming"
+			puts hash.inspect
 			if hash
 				hash.each_pair do |k,v|
 					self[k] = v
