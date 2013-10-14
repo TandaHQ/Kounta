@@ -5,17 +5,15 @@ module Kounta
 	module REST
 		class Client
 
-			DOMAIN = "http://www.kounta.com"
-			VERSION = "v1"
-			PATH = "#{DOMAIN}/#{VERSION}"
-			FORMAT = "json"
+			API = "https://api.kounta.com/v1"
+			FORMAT = :json
 
 			# TODO - set settings
 
 			def initialize
-				@conn = Faraday.new(:url => PATH) do |faraday|
+				@conn = Faraday.new(:url => API) do |faraday|
 					faraday.request :url_encoded
-					faraday.response :json
+					faraday.response FORMAT
 					faraday.adapter Faraday.default_adapter
 				end
 			end
@@ -25,7 +23,7 @@ module Kounta
 			end
 
 			def perform(url_hash, request_method, options={})
-				@conn.send(request_method.to_sym, "#{path_from_hash(url_hash)}.#{FORMAT}", options).body
+				@conn.send(request_method.to_sym, "#{path_from_hash(url_hash)}.#{FORMAT.to_s}", options).body
 			end
 
 			def objects_from_response(klass, request_method, url_hash, options={})
