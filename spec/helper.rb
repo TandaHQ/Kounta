@@ -17,7 +17,10 @@ RSpec.configure do |config|
 		stub_endpoints
 
 		Kounta.configure do |config|
-			config.oauth_client_token = "abcd1234"
+			config.client_id = "1234"
+			config.client_secret = "5678"
+			config.client_token = "abcd"
+			config.client_refresh_token = "efgh"
 		end
 
 	end

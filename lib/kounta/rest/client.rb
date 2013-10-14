@@ -37,7 +37,7 @@ module Kounta
 					end
 				end
 				raise Kounta::Errors::APIError, response.body['error_description'] if response.status != 200 && response.status != 201
-				response.body
+				response.parsed
 			end
 
 			def objects_from_response(klass, request_method, url_hash, options={})

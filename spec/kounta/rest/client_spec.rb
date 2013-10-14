@@ -4,8 +4,8 @@ describe Kounta::REST::Client do
 
 	subject { Kounta::REST::Client.new }
 
-	it "should throw an error when creating a client without an oauth token" do
-		Kounta.oauth_client_token = nil
+	it "should throw an error when creating a client without required tokens" do
+		Kounta.client_token = nil
 		expect { Kounta::REST::Client.new }.to raise_error Kounta::Errors::MissingOauthDetails
 	end
 
