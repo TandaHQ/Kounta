@@ -26,10 +26,10 @@ module Kounta
 		end
 
 		def to_hash
-			super({
-				lines: lines.map {|line| line.to_hash },
-				payments: payments.map {|payment| payment.to_hash }
-			})
+			returning = {}
+			returning[:lines] = lines.map {|line| line.to_hash } if lines
+			returning[:payments] = payments.map {|payment| payment.to_hash } if payments
+			super(returning)
 		end
 
 		def resource_path
@@ -44,3 +44,4 @@ module Kounta
 	end
 
 end
+
