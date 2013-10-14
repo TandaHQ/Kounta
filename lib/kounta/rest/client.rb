@@ -13,9 +13,11 @@ module Kounta
 
 				@conn = Faraday.new(:url => API) do |faraday|
 					faraday.request :url_encoded
+					faraday.request :oauth2, Kounta.oauth_client_token
 					faraday.response FORMAT
 					faraday.adapter Faraday.default_adapter
 				end
+
 			end
 
 			def path_from_hash(url_hash)
