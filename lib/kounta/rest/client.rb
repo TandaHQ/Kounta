@@ -8,9 +8,9 @@ module Kounta
 			API = "https://api.kounta.com/v1"
 			FORMAT = :json
 
-			# TODO - set settings
-
 			def initialize
+				raise Kounta::MissingOauthDetails unless Kounta.oauth_client_token
+
 				@conn = Faraday.new(:url => API) do |faraday|
 					faraday.request :url_encoded
 					faraday.response FORMAT

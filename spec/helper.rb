@@ -11,7 +11,15 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
 RSpec.configure do |config|
 	config.include Helpers
+
 	config.before(:each) do
+		
 		stub_endpoints
+
+		Kounta.configure do |config|
+			config.oauth_client_token = "abcd1234"
+		end
+
 	end
+
 end

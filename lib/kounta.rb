@@ -18,4 +18,16 @@ module Kounta
 	def self.root
 		File.expand_path '../..', __FILE__
 	end
+
+	def self.configure
+		yield self
+	end
+
+	def self.oauth_client_token=(options)
+		@oauth_options = options
+	end
+
+	def self.oauth_client_token
+		@oauth_options
+	end
 end
