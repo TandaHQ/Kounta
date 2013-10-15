@@ -21,7 +21,7 @@ module Kounta
 		def self.has_one(sym, klass, assignments, route)
 			define_method(sym) do |item_id=nil, *args|
 				if item_id
-					assign_into(client.object_from_response(klass, :get, route.call(self, item_id), args[0]), self, assignments)
+					assign_into(client.object_from_response(klass, :get, route.call(self, item_id), {:params => args[0]}), self, assignments)
 				else
 					assign_into(klass.new, self, assignments)
 				end
@@ -30,7 +30,7 @@ module Kounta
 
 		def self.has_many(sym, klass, assignments, route)
 			define_method(sym) do |*args|
-				client.objects_from_response(klass, :get, route.call(self), args[0]).map {|returned_klass| assign_into(returned_klass, self, assignments) }
+				client.objects_from_response(klass, :get, route.call(self), {:params => args[0]}).map {|returned_klass| assign_into(returned_klass, self, assignments) }
 			end
 		end
 
@@ -54,13 +54,13 @@ module Kounta
 			{}.tap do |returning|
 				self.class.properties.each do |property|
 					next if ignored_properties.include?(property)
-					returning[property] = self[property]
+					returning[property] = self[property] if self[property]
 				end
 			end.merge(hash)
 		end
 
 		def save!
-			response = new? ? client.perform(resource_path, :post, to_hash) : client.perform(resource_path, :put, to_hash)
+			response = new? ? client.perform(resource_path, :post, {:body => to_hash}) : client.perform(resource_path, :put, {:body => to_hash})
 			if response
 				response.each_pair do |k,v|
 					self[k] = v
@@ -74,7 +74,7 @@ module Kounta
 		end
 
 		def ignored_properties(array=[])
-			array + [:created_at, :updated_at]
+			array + [:created_at, :updated_at, :id, :company_id, :site_id]
 		end
 
 		private
