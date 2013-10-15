@@ -16,13 +16,13 @@ module Kounta
 			end
 
 			def client
-				@oauth_client ||= OAuth2::Client.new(
-					Kounta.client_id,
-					Kounta.client_secret,
+				@oauth_client ||= OAuth2::Client.new(Kounta.client_id, Kounta.client_secret, {
 					:site => Kounta::SITE_URI,
 					:authorize_url => Kounta::AUTHORIZATION_URI,
 					:token_url => Kounta::TOKEN_URI
-				)
+				}) do |farady|
+					
+				end
 			end
 
 			def path_from_hash(url_hash)
