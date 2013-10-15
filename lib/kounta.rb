@@ -21,6 +21,10 @@ module Kounta
 	SITE_URI = "https://api.kounta.com/v1/"
 	FORMAT = :json
 
+	def self.log(message)
+
+	end
+
 	def self.root
 		File.expand_path '../..', __FILE__
 	end
@@ -59,6 +63,14 @@ module Kounta
 
 	def self.client_refresh_token
 		@client_refresh_token
+	end
+
+	def self.enable_logging= (value)
+		@enable_logging = value
+	end
+
+	def self.enable_logging
+		@enable_logging
 	end
 
 end

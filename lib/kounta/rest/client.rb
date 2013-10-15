@@ -3,6 +3,7 @@ require 'faraday_middleware'
 require 'oauth2'
 require 'base64'
 require 'oj'
+require 'yell'
 
 module Kounta
 	module REST
@@ -10,6 +11,7 @@ module Kounta
 
 			def initialize
 				raise Kounta::Errors::MissingOauthDetails unless has_required_oauth_details?
+				@logger = Yell.new STDOUT
 				@conn = OAuth2::AccessToken.new(client, Kounta.client_token, {:refresh_token => Kounta.client_refresh_token})
 			end
 
@@ -28,16 +30,17 @@ module Kounta
 			end
 
 			def perform(url_hash, request_method, options={})
+				log("#{path_from_hash(url_hash)}.#{FORMAT.to_s}")
 				begin
 					response = @conn.send(request_method.to_sym, "#{path_from_hash(url_hash)}.#{FORMAT.to_s}", options)
 				rescue OAuth2::Error => ex
 					if ex.message.include? 'The access token provided has expired'
-						puts "--- refreshing token"
-						@conn = OAuth2::AccessToken.from_hash(client, :refresh_token => Kounta.client_refresh_token).refresh!
+						log('Refreshing token')
+						@conn = refreshed_token
 						retry
 					end
 				end
-				raise Kounta::Errors::APIError, response.body['error_description'] if response.status != 200 && response.status != 201
+				log(response.parsed)
 				response.parsed
 			end
 
@@ -53,6 +56,14 @@ module Kounta
 
 				def has_required_oauth_details?
 					Kounta.client_id && Kounta.client_secret && Kounta.client_token && Kounta.client_refresh_token
+				end
+
+				def log(message)
+					@logger.info(message) unless !Kounta.enable_logging
+				end
+
+				def refreshed_token
+					OAuth2::AccessToken.from_hash(client, :refresh_token => Kounta.client_refresh_token).refresh!
 				end
 
 		end
