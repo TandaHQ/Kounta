@@ -19,9 +19,9 @@ module Kounta
 		end
 
 		def self.has_one(sym, klass, assignments, route)
-			define_method(sym) do |item_id=nil|
+			define_method(sym) do |item_id=nil, *args|
 				if item_id
-					assign_into(client.object_from_response(klass, :get, route.call(self, item_id)), self, assignments)
+					assign_into(client.object_from_response(klass, :get, route.call(self, item_id), args[0]), self, assignments)
 				else
 					assign_into(klass.new, self, assignments)
 				end
@@ -29,8 +29,8 @@ module Kounta
 		end
 
 		def self.has_many(sym, klass, assignments, route)
-			define_method(sym) do
-				client.objects_from_response(klass, :get, route.call(self)).map {|returned_klass| assign_into(returned_klass, self, assignments) }
+			define_method(sym) do |*args|
+				client.objects_from_response(klass, :get, route.call(self), args[0]).map {|returned_klass| assign_into(returned_klass, self, assignments) }
 			end
 		end
 
