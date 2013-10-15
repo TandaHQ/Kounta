@@ -30,7 +30,7 @@ module Kounta
 			end
 
 			def perform(url_hash, request_method, options={})
-				log("#{path_from_hash(url_hash)}.#{FORMAT.to_s}")
+				log("fetching: #{Kounta::SITE_URI}/#{path_from_hash(url_hash)}.#{FORMAT.to_s}")
 				begin
 					response = @conn.send(request_method.to_sym, "#{path_from_hash(url_hash)}.#{FORMAT.to_s}", options)
 				rescue OAuth2::Error => ex
@@ -40,7 +40,6 @@ module Kounta
 						retry
 					end
 				end
-				log(response.parsed)
 				response.parsed
 			end
 

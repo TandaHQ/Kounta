@@ -70,7 +70,7 @@ module Kounta
 	end
 
 	def self.enable_logging
-		@enable_logging
+		@enable_logging || false
 	end
 
 end
