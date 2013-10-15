@@ -23,18 +23,14 @@ module Kounta
 				if item_id
 					client.object_from_response(klass, :get, route.call(self, item_id))
 				else
-					instance = klass.new
-					assignments.each_pair do |k,v|
-						instance[k] = self[v]
-					end
-					instance
+					assign_into(klass.new, self, assignments)
 				end
 			end
 		end
 
-		def self.has_many(sym, klass, route)
+		def self.has_many(sym, klass, assignments, route)
 			define_method(sym) do
-				client.objects_from_response(klass, :get, route.call(self))
+				client.objects_from_response(klass, :get, route.call(self)).map {|returned_klass| assign_into(returned_klass, self, assignments) }
 			end
 		end
 
@@ -74,6 +70,15 @@ module Kounta
 		def ignored_properties(array=[])
 			array + [:created_at, :updated_at]
 		end
+
+		private
+
+			def assign_into(klass, assigner, assignments)
+				assignments.each_pair do |k,v|
+					klass[k] = assigner[v]
+				end
+				klass
+			end
 
 	end
 

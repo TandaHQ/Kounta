@@ -21,12 +21,12 @@ module Kounta
 		has_one :site, Kounta::Site, {:company_id => :id}, lambda { |klass, item_id| {companies: klass.id, sites: item_id} }
 		has_one :price_list, Kounta::PriceList, {:company_id => :id}, lambda { |klass, item_id| {companies: klass.id, price_lists: item_id} }
 
-		has_many :products, Kounta::Product, lambda { |klass| {companies: klass.id, products: nil} }
-		has_many :categories, Kounta::Category, lambda { |klass| {companies: klass.id, categories: nil} }
-		has_many :customers, Kounta::Customer, lambda { |klass| {companies: klass.id, customers: nil} }
-		has_many :sites, Kounta::Site, lambda { |klass| {companies: klass.id, sites: nil} }
-		has_many :price_lists, Kounta::PriceList, lambda { |klass| {companies: klass.id, price_lists: nil} }
-		has_many :taxes, Kounta::Tax, lambda { |klass| {companies: klass.id, taxes: nil} }
+		has_many :products, Kounta::Product, {:company_id => :company_id}, lambda { |klass| {companies: klass.id, products: nil} }
+		has_many :categories, Kounta::Category, {:company_id => :company_id}, lambda { |klass| {companies: klass.id, categories: nil} }
+		has_many :customers, Kounta::Customer, {:company_id => :company_id}, lambda { |klass| {companies: klass.id, customers: nil} }
+		has_many :sites, Kounta::Site, {:company_id => :id}, lambda { |klass| {companies: klass.id, sites: nil} }
+		has_many :price_lists, Kounta::PriceList, {:company_id => :company_id}, lambda { |klass| {companies: klass.id, price_lists: nil} }
+		has_many :taxes, Kounta::Tax, {:company_id => :company_id}, lambda { |klass| {companies: klass.id, taxes: nil} }
 
 		def initialize(hash={})
 			if hash.empty?

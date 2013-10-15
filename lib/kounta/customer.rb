@@ -19,8 +19,8 @@ module Kounta
 
 		has_one :address, Kounta::Address, {:company_id => :company_id}, lambda { |klass, item_id| {companies: klass.company_id, addresses: item_id} }
 		has_one :order, Kounta::Order, {:company_id => :company_id}, lambda { |klass, item_id| {companies: klass.company_id, orders: item_id} }
-		has_many :addresses, Kounta::Address, lambda { |klass| {companies: klass.company_id, addresses: nil} }
-		has_many :orders, Kounta::Order, lambda { |klass| {companies: klass.company_id, orders: nil} }
+		has_many :addresses, Kounta::Address, {:company_id => :company_id}, lambda { |klass| {companies: klass.company_id, addresses: nil} }
+		has_many :orders, Kounta::Order, {:company_id => :company_id}, lambda { |klass| {companies: klass.company_id, orders: nil} }
 
 		def name
 			"#{first_name} #{last_name}"
