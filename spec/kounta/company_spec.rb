@@ -14,7 +14,7 @@ describe Kounta::Company do
 	end
 
 	it "should have a resource path" do
-		subject.new.resource_path.should eq({companies: 2345})
+		subject.new.resource_path.should eq({companies: 162})
 	end
 
 	it "should have a base price list" do

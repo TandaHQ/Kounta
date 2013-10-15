@@ -31,10 +31,10 @@ describe Kounta::Resource do
 	end
 
 	it "should be able to create an empty instance of the has_one relationship and apply mappings to it" do
-		@instance.id = 2345
+		@instance.id = 162
 		address = @instance.address
 		address.should be_an_instance_of Kounta::Address
-		address.company_id.should be(2345)
+		address.company_id.should be(162)
 	end
 
 	it "should create a has_many relationship mapping" do
@@ -70,7 +70,7 @@ describe Kounta::Resource do
 		subject.property :price_variation
 		instance = subject.new
 		instance.id = nil
-		instance.define_singleton_method :resource_path, lambda { {companies: 2345, orders: 6789, lines: nil} }
+		instance.define_singleton_method :resource_path, lambda { {companies: 162, orders: 6789, lines: nil} }
 		instance.save!.should be_an_instance_of subject
 		WebMock.should have_requested(:post, group_endpoint('lines'))
 	end
@@ -82,8 +82,8 @@ describe Kounta::Resource do
 		subject.property :notes
 		subject.property :price_variation
 		instance = subject.new
-		instance.id = 2345
-		instance.define_singleton_method :resource_path, lambda { {companies: 2345, orders: 6789, lines: 2345} }
+		instance.id = 162
+		instance.define_singleton_method :resource_path, lambda { {companies: 162, orders: 6789, lines: 2345} }
 		instance.save!.should be_an_instance_of subject
 		WebMock.should have_requested(:put, singular_endpoint('lines'))
 	end

@@ -21,7 +21,7 @@ module Kounta
 		def self.has_one(sym, klass, assignments, route)
 			define_method(sym) do |item_id=nil|
 				if item_id
-					client.object_from_response(klass, :get, route.call(self, item_id))
+					assign_into(client.object_from_response(klass, :get, route.call(self, item_id)), self, assignments)
 				else
 					assign_into(klass.new, self, assignments)
 				end
@@ -61,8 +61,10 @@ module Kounta
 
 		def save!
 			response = new? ? client.perform(resource_path, :post, to_hash) : client.perform(resource_path, :put, to_hash)
-			response.each_pair do |k,v|
-				self[k] = v
+			if response
+				response.each_pair do |k,v|
+					self[k] = v
+				end
 			end
 			self
 		end

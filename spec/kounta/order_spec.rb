@@ -31,7 +31,7 @@ describe Kounta::Order do
 	end
 
 	it "should have a resource path" do
-		subject.resource_path.should eq({companies: 2345, orders: 93824701})
+		subject.resource_path.should eq({companies: 162, orders: 93824701})
 	end
 
 end

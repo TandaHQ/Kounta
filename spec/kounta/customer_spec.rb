@@ -9,7 +9,7 @@ describe Kounta::Customer do
 	end
 
 	it "should have a resource path" do
-		subject.resource_path.should eq({companies: 2345, customers: 389427})
+		subject.resource_path.should eq({companies: 162, customers: 389427})
 	end
 
 end

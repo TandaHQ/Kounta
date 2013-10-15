@@ -10,7 +10,7 @@ describe Kounta::Product do
 	end
 
 	it "should have a resource path" do
-		subject.resource_path.should eq({companies: 2345, products: 1})
+		subject.resource_path.should eq({companies: 162, products: 1})
 	end
 
 end
