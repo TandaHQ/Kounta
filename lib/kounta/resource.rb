@@ -47,7 +47,7 @@ module Kounta
 		end
 
 		def client
-			@client ||= Kounta::REST::Client.new
+			@@client ||= Kounta::REST::Client.new
 		end
 
 		def to_hash(hash={})

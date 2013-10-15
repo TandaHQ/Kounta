@@ -10,4 +10,12 @@ describe Kounta do
 		end
 	end
 
+	it "should be able to configure loggin" do
+		Kounta.enable_logging.should be(false)
+		Kounta.enable_logging = true
+		Kounta.enable_logging.should be(true)
+		Kounta.enable_logging = false
+		Kounta.enable_logging.should be(false)
+	end
+
 end

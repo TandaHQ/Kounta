@@ -62,6 +62,10 @@ describe Kounta::Resource do
 		@instance.to_hash({:merge => "me"}).should eq({:id => 345, :merge => "me"})
 	end
 
+	it "should raise an error when presented with an unknown attribute" do
+		expect { subject.new({:id => 345, :new_attribute => 'value'}) }.to raise_error Kounta::Errors::UnknownResourceAttribute
+	end
+
 	it "should be able to save a new object" do
 		subject.property :number
 		subject.property :product_id
