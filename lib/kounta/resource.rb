@@ -37,7 +37,11 @@ module Kounta
 		def initialize(hash={})
 			if hash
 				hash.each_pair do |k,v|
-					self[k] = v
+					begin
+						self[k] = v
+					rescue NoMethodError => e
+						raise Kounta::Errors::UnknownResourceAttribute.new("Unknown attribute: #{k} on resource #{self.class}")
+					end
 				end
 			end
 		end

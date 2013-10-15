@@ -10,8 +10,8 @@ require_relative "kounta/payment"
 require_relative "kounta/line"
 require_relative "kounta/order"
 require_relative "kounta/customer"
-require_relative "kounta/site"
 require_relative "kounta/price_list"
+require_relative "kounta/site"
 require_relative "kounta/company"
 
 module Kounta

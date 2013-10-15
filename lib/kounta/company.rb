@@ -14,6 +14,7 @@ module Kounta
 		property :timezone
 		property :sites
 		property :registers
+		property :email
 
 		has_one :product, Kounta::Product, {:company_id => :id}, lambda { |klass, item_id| {companies: klass.id, products: item_id} }
 		has_one :category, Kounta::Category, {:company_id => :id}, lambda { |klass, item_id| {companies: klass.id, categories: item_id} }

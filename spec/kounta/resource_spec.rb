@@ -6,7 +6,7 @@ describe Kounta::Resource do
 
 	before :each do
 		subject.has_one(:address, Kounta::Address, {:company_id => :id}, lambda { |klass, item_id| {companies: klass.id, addresses: item_id} })
-		subject.has_many :addresses, Kounta::Address, lambda { |klass| {companies: klass.id, addresses: nil} }
+		subject.has_many :addresses, Kounta::Address, {:company_id => :id}, lambda { |klass| {companies: klass.id, addresses: nil} }
 		@instance = subject.new({:id => 345})
 	end
 
@@ -30,7 +30,7 @@ describe Kounta::Resource do
 		WebMock.should have_requested(:get, singular_endpoint('addresses'))
 	end
 
-	it "should be able to create an empty instance of the relationship and apply mappings to it" do
+	it "should be able to create an empty instance of the has_one relationship and apply mappings to it" do
 		@instance.id = 2345
 		address = @instance.address
 		address.should be_an_instance_of Kounta::Address
@@ -44,6 +44,12 @@ describe Kounta::Resource do
 	it "should respond with an array of objects" do
 		@instance.addresses.each do |address|
 			address.should be_an_instance_of Kounta::Address
+		end
+	end
+
+	it "should apply assignments to the has_many relationship" do
+		@instance.addresses.each do |address|
+			address.company_id.should be(@instance.id)
 		end
 	end
 
