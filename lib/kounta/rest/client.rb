@@ -1,8 +1,4 @@
-require 'faraday'
-require 'faraday_middleware'
 require 'oauth2'
-require 'base64'
-require 'oj'
 require 'yell'
 
 module Kounta
@@ -13,6 +9,7 @@ module Kounta
 				raise Kounta::Errors::MissingOauthDetails unless has_required_oauth_details?
 				@logger = Yell.new STDOUT
 				@conn = OAuth2::AccessToken.new(client, Kounta.client_token, {:refresh_token => Kounta.client_refresh_token})
+
 			end
 
 			def client
@@ -20,9 +17,7 @@ module Kounta
 					:site => Kounta::SITE_URI,
 					:authorize_url => Kounta::AUTHORIZATION_URI,
 					:token_url => Kounta::TOKEN_URI
-				}) do |farady|
-					
-				end
+				})
 			end
 
 			def path_from_hash(url_hash)
@@ -40,6 +35,8 @@ module Kounta
 						retry
 					end
 				end
+				puts "--- response"
+				puts response.inspect
 				response.parsed if response
 			end
 
