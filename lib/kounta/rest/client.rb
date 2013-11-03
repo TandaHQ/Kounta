@@ -35,8 +35,6 @@ module Kounta
 						retry
 					end
 				end
-				puts "--- response"
-				puts response.inspect
 				response.parsed if response
 			end
 

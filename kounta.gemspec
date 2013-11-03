@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'kounta/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "kounta"
+  spec.name          = "kounta_rest"
   spec.version       = Kounta::VERSION
   spec.authors       = ["Samuel Richardson"]
   spec.email         = ["sam@richardson.co.nz"]
