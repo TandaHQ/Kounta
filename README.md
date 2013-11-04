@@ -49,6 +49,21 @@ For the products belonging to a site
 
 Please see the test sweet for full details of these.
 
+### Console
+
+To aid debugging their is an interactive console. To get started, you'll need to create a "tokens.yml" file in the root of gem, like:
+
+    client_id: abcd1234
+    client_secret: abcd1234
+    client_token: abcd1234
+    client_refresh_token: abcd1234
+
+Then run:
+
+    ruby console.rb
+
+Get started by creating a Kounta::Company object (see above for detailed usage).
+
 ## Contributing
 
 1. Fork it
