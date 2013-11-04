@@ -8,7 +8,7 @@ describe Kounta::Order do
 		new_order = Kounta::Order.new
 		new_order.payments << Kounta::Payment.new(:amount => 50.00)
 		new_order.to_hash[:payments].length.should be(1)
-		new_order.to_hash[:payments][0][:amount].should be(50.00)
+		new_order.to_hash[:payments][0][:amount].should eq(50.00)
 	end
 
 	it "should be able to add lines to new orders" do
@@ -21,7 +21,7 @@ describe Kounta::Order do
 	it "should be able to add and serialise payments to created orders" do
 		subject.payments << Kounta::Payment.new(:amount => 50.00)
 		subject.to_hash[:payments].length.should be(3)
-		subject.to_hash[:payments][2][:amount].should be(50.00)
+		subject.to_hash[:payments][2][:amount].should eq(50.00)
 	end
 
 	it "should be able to add and serialise lines to created orders" do

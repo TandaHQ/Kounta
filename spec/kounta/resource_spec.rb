@@ -58,8 +58,8 @@ describe Kounta::Resource do
 	end
 
 	it "should be able to serialise itself to a hash" do
-		@instance.to_hash.should eq({:id => 345})
-		@instance.to_hash({:merge => "me"}).should eq({:id => 345, :merge => "me"})
+		@instance.to_hash.class.should be(Hash)
+		@instance.to_hash(:merge => "me").should eq(:merge => "me")
 	end
 
 	it "should raise an error when presented with an unknown attribute" do

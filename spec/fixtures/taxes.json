@@ -1,13 +1,13 @@
 [
   {
-    "company_id": 2345,
+    "company_id": 162,
     "id": 829,
     "code": "GST",
     "name": "Goods & Services Tax",
     "rate": 0.1
   },
   {
-    "company_id": 2345,
+    "company_id": 162,
     "id": 844,
     "code": "WET",
     "name": "Wine Equalisation Tax",

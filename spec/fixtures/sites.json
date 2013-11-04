@@ -1,12 +1,12 @@
 [
   {
-    "company_id": 2345,
+    "company_id": 162,
     "id": 923,
     "name": "Port Melbourne Store",
     "code": "PM"
   },
   {
-    "company_id": 2345,
+    "company_id": 162,
     "id": 985,
     "name": "Online Store",
     "code": "Online"

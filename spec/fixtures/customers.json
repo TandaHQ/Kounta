@@ -1,7 +1,7 @@
 [
   {
     "id": 389427,
-    "company_id": 2345,
+    "company_id": 162,
     "first_name": "Jamie",
     "last_name": "McDonald",
     "primary_email_address": "jamie@kounta.kom",
@@ -9,7 +9,7 @@
   },
   {
     "id": 389428,
-    "company_id": 2345,
+    "company_id": 162,
     "first_name": "Sam",
     "last_name": "Flanders",
     "primary_email_address": "sam@kounta.kom",
@@ -17,7 +17,7 @@
   },
   {
     "id": 389426,
-    "company_id": 2345,
+    "company_id": 162,
     "first_name": "Samuel",
     "last_name": "Richardson",
     "primary_email_address": "disco16@gmail.com",
