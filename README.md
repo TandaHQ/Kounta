@@ -6,7 +6,7 @@ Allows easy access to the Kounta POS RESTful API.
 
 Add this line to your application's Gemfile:
 
-    gem 'kounta'
+    gem 'kounta_rest'
 
 And then execute:
 
@@ -14,7 +14,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install kounta
+    $ gem install kounta_rest
 
 ## Usage
 
