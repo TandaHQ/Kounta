@@ -22,12 +22,12 @@ Or install it yourself as:
 
 Then add your API details / other configuration options
 
-Kounta.configure do |config|
-    config.client_id = "abcd1234"
-    config.client_secret = "abcd1234"
-    config.client_token = "abcd1234"
-    config.client_refresh_token = "abcd1234"
-end
+    Kounta.configure do |config|
+        config.client_id = "abcd1234"
+        config.client_secret = "abcd1234"
+        config.client_token = "abcd1234"
+        config.client_refresh_token = "abcd1234"
+    end
 
 You may also enable / disable logging (disabled by default)
 
