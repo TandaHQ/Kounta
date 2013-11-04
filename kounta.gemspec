@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Kounta::VERSION
   spec.authors       = ["Samuel Richardson"]
   spec.email         = ["sam@richardson.co.nz"]
-  spec.description   = %q{Library for accessing Kountas RESTful API}
-  spec.summary       = %q{Will write this}
-  spec.homepage      = "http://www.richardson.co.nz"
+  spec.description   = %q{Library for accessing Kounta's RESTful API}
+  spec.summary       = %q{A wrapper around Kounta's RESTful API}
+  spec.homepage      = "https://github.com/Rodeoclash/Kounta"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

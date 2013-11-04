@@ -1,0 +1,25 @@
+{
+  "id": 1,
+  "company_id": 2345,
+  "name": "Salomon Undhof Wieden & Berg Gruner Veltliner",
+  "code": "wine298",
+  "description": "Pale-coloured, with a rich nose of fresh herbs and peppery cucumber varietal character. Soft, rounded and nicely balanced with a clean, dry palate and some opulence.",
+  "barcode": "1234567890",
+  "image": "http://danmurphys.com.au/media/DM/Product/750x2000/332012_0_9999_v1_m56577569853958110.jpg",
+  "tags": [
+    "Fresh Food",
+    "Fragile",
+    "Organic"
+  ],
+  "unit_price": 6.8,
+  "cost_price": 4,
+  "stock": 21,
+  "taxes": [
+    {
+      "id": 829,
+      "code": "GST",
+      "name": "GST",
+      "rate": 0.1
+    }
+  ]
+}

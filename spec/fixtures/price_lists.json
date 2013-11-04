@@ -1,0 +1,12 @@
+[
+  {
+    "id": 201,
+    "name": "Store Prices",
+    "parent_id": null
+  },
+  {
+    "id": 236,
+    "name": "Online Prices",
+    "parent_id": 201
+  }
+]

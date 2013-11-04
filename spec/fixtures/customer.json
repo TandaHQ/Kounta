@@ -1,0 +1,39 @@
+{
+  "id": 389427,
+  "company_id": 2345,
+  "people_id": 701892,
+  "first_name": "Samuel",
+  "last_name": "Richardson",
+  "description": "The cyclist who comes in every Thursday for a muffin.",
+  "primary_email_address": "sam@richardson.co.nz",
+  "email_addresses": [
+    "jamie@kounta.kom",
+    "jamie112783@hotmail.kom"
+  ],
+  "phone": "+612 8765 4321",
+  "mobile": "0405 060 708",
+  "fax": null,
+  "shipping_address": {
+    "id": 198109,
+    "lines": [
+      "Suite 5, Level 12",
+      "44 Mutton Street"
+    ],
+    "city": "Beeftown",
+    "zone": "NSW",
+    "postal_code": "2112",
+    "country": "AU"
+  },
+  "postal_address": null,
+  "addresses": {
+    "count": 3,
+    "updated_at": "2013-05-22T16:21:40+10:00"
+  },
+  "image": "http://www.gravatar.com/avatar/cc6f3f16c233257d437ea5163787645e.jpg",
+  "tags": [
+    "Gold Member",
+    "Newsletter"
+  ],
+  "created_at": "2013-05-08T13:56:02+10:00",
+  "updated_at": "2013-05-22T16:21:40+10:00"
+}

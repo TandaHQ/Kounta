@@ -1,0 +1,25 @@
+[
+  {
+    "id": 198109,
+    "people_id": 701892,
+    "lines": [
+      "Suite 5, Level 12",
+      "44 Mutton Street"
+    ],
+    "city": "Beeftown",
+    "zone": "NSW",
+    "postal_code": "2112",
+    "country": "AU"
+  },
+  {
+    "id": 198770,
+    "people_id": 701892,
+    "lines": [
+      "PO Box 828"
+    ],
+    "city": "Sydney",
+    "zone": "NSW",
+    "postal_code": "2000",
+    "country": "AU"
+  }
+]
