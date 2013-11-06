@@ -1,0 +1,41 @@
+{
+  "id": 701892,
+  "first_name": "Jamie",
+  "last_name": "McDonald",
+  "customer_id": 389427,
+  "staff_id": null,
+  "primary_email_address": "jamie@kounta.kom",
+  "email_addresses": [
+    "jamie@kounta.kom",
+    "jamie112783@hotmail.kom"
+  ],
+  "shipping_address": {
+    "id": 198109,
+    "lines": [
+      "Suite 5, Level 12",
+      "44 Mutton Street"
+    ],
+    "city": "Beeftown",
+    "zone": "NSW",
+    "postal_code": "2112",
+    "country": "AU"
+  },
+  "postal_address": null,
+  "addresses": {
+    "count": 3,
+    "updated_at": "2013-05-22T16:21:40+10:00"
+  },
+  "phone_numbers": [
+    {
+      "label": "Phone",
+      "number": "(02) 9876 5432"
+    },
+    {
+      "label": "Mobile",
+      "number": "0405 060 708"
+    }
+  ],
+  "image": "http://www.gravatar.com/avatar/cc6f3f16c233257d437ea5163787645e.jpg",
+  "created_at": "2013-05-08T13:56:02+10:00",
+  "updated_at": "2013-05-22T16:21:40+10:00"
+}

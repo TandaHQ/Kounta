@@ -1,0 +1,20 @@
+[
+  {
+    "id": 701892,
+    "first_name": "Jamie",
+    "last_name": "McDonald",
+    "customer_id": 389427,
+    "staff_id": null,
+    "primary_email_address": "jamie@kounta.kom",
+    "image": "http://www.gravatar.com/avatar/cc6f3f16c233257d437ea5163787645e.jpg"
+  },
+  {
+    "id": 742890,
+    "first_name": "Jim",
+    "last_name": "Bluth",
+    "customer_id": null,
+    "staff_id": 3012,
+    "primary_email_address": "jim@kounta.kom",
+    "image": null
+  }
+]

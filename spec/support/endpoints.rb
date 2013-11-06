@@ -29,6 +29,7 @@ module Helpers
 		# create
 		stub_request(:post, group_endpoint('products')).to_return(:body => load_json_from_fixture('product.json'), :headers => endpoint_headers)
 		stub_request(:post, group_endpoint('customers')).to_return(:body => load_json_from_fixture('customer.json'), :headers => endpoint_headers)
+		stub_request(:post, group_endpoint('people')).to_return(:body => load_json_from_fixture('person.json'), :headers => endpoint_headers)
 		stub_request(:post, group_endpoint('categories')).to_return(:body => load_json_from_fixture('category.json'), :headers => endpoint_headers)
 		stub_request(:post, group_endpoint('addresses')).to_return(:body => load_json_from_fixture('address.json'), :headers => endpoint_headers)
 		stub_request(:post, group_endpoint('payments')).to_return(:body => load_json_from_fixture('payment.json'), :headers => endpoint_headers)
@@ -40,6 +41,8 @@ module Helpers
 		stub_request(:get, group_endpoint('categories')).to_return(:body => load_json_from_fixture('categories.json'), :headers => endpoint_headers)
 		stub_request(:get, singular_endpoint('customers')).to_return(:body => load_json_from_fixture('customer.json'), :headers => endpoint_headers)
 		stub_request(:get, group_endpoint('customers')).to_return(:body => load_json_from_fixture('customers.json'), :headers => endpoint_headers)
+		stub_request(:get, singular_endpoint('people')).to_return(:body => load_json_from_fixture('person.json'), :headers => endpoint_headers)
+		stub_request(:get, group_endpoint('people')).to_return(:body => load_json_from_fixture('people.json'), :headers => endpoint_headers)
 		stub_request(:get, singular_endpoint('addresses')).to_return(:body => load_json_from_fixture('address.json'), :headers => endpoint_headers)
 		stub_request(:get, group_endpoint('addresses')).to_return(:body => load_json_from_fixture('addresses.json'), :headers => endpoint_headers)
 		stub_request(:get, singular_endpoint('products')).to_return(:body => load_json_from_fixture('product.json'), :headers => endpoint_headers)
@@ -57,6 +60,7 @@ module Helpers
 		# update
 		stub_request(:put, singular_endpoint('products')).to_return(:body => load_json_from_fixture('product.json'), :headers => endpoint_headers)
 		stub_request(:put, singular_endpoint('customers')).to_return(:body => load_json_from_fixture('customer.json'), :headers => endpoint_headers)
+		stub_request(:put, singular_endpoint('people')).to_return(:body => load_json_from_fixture('person.json'), :headers => endpoint_headers)
 		stub_request(:put, singular_endpoint('categories')).to_return(:body => load_json_from_fixture('category.json'), :headers => endpoint_headers)
 		stub_request(:put, singular_endpoint('addresses')).to_return(:body => load_json_from_fixture('address.json'), :headers => endpoint_headers)
 		stub_request(:put, singular_endpoint('payments')).to_return(:body => load_json_from_fixture('payment.json'), :headers => endpoint_headers)
