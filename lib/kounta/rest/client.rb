@@ -28,8 +28,6 @@ module Kounta
 				begin
 					log("#{request_method}: #{Kounta::SITE_URI}#{path_from_hash(url_hash)}.#{FORMAT.to_s} (#{options})")
 					response = @conn.request(request_method, "#{path_from_hash(url_hash)}.#{FORMAT.to_s}", options)
-					log("response:")
-					log("#{response.parsed}")
 				rescue OAuth2::Error => ex
 					if ex.message.include? 'The access token provided has expired'
 						log('oauth2 token expired, refreshing it...')
@@ -37,7 +35,16 @@ module Kounta
 						retry
 					end
 				end
-				response.parsed if response
+
+				log("response:")
+				
+				if response
+					log("#{response.parsed}")
+					response.parsed
+				else
+					log('No response recieved')
+					nil
+				end
 			end
 
 			def objects_from_response(klass, request_method, url_hash, options={})

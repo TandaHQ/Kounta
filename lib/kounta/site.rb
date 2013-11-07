@@ -32,6 +32,7 @@ module Kounta
 		has_many :categories, Kounta::Category, {:company_id => :company_id}, lambda { |klass| {companies: klass.company_id, sites: klass.id, categories: nil} }
 		has_many :addresses, Kounta::Address, {:company_id => :company_id}, lambda { |klass| {companies: klass.company_id, sites: klass.id, addresses: nil} }
 		has_many :orders, Kounta::Order, {:company_id => :company_id}, lambda { |klass| {companies: klass.company_id, sites: klass.id, orders: nil} }
+		has_many :inventory, Kounta::Inventory, {:company_id => :company_id}, lambda { |klass| {companies: klass.company_id, sites: klass.id, inventory: nil} }
 
 		def resource_path
 			{companies: company_id, sites: id}

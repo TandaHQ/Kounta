@@ -56,6 +56,7 @@ module Helpers
 		stub_request(:get, group_endpoint('taxes')).to_return(:body => load_json_from_fixture('taxes.json'), :headers => endpoint_headers)
 		stub_request(:get, singular_endpoint('orders')).to_return(:body => load_json_from_fixture('order.json'), :headers => endpoint_headers)
 		stub_request(:get, group_endpoint('orders')).to_return(:body => load_json_from_fixture('orders.json'), :headers => endpoint_headers)
+		stub_request(:get, group_endpoint('inventory')).to_return(:body => load_json_from_fixture('inventory.json'), :headers => endpoint_headers)
 
 		# update
 		stub_request(:put, singular_endpoint('products')).to_return(:body => load_json_from_fixture('product.json'), :headers => endpoint_headers)

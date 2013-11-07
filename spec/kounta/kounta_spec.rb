@@ -10,7 +10,7 @@ describe Kounta do
 		end
 	end
 
-	it "should be able to configure loggin" do
+	it "should be able to configure logging" do
 		Kounta.enable_logging.should be(false)
 		Kounta.enable_logging = true
 		Kounta.enable_logging.should be(true)

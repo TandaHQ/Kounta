@@ -12,6 +12,7 @@ require_relative "kounta/order"
 require_relative "kounta/person"
 require_relative "kounta/customer"
 require_relative "kounta/price_list"
+require_relative "kounta/inventory"
 require_relative "kounta/site"
 require_relative "kounta/company"
 
