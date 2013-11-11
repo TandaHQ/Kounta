@@ -23,6 +23,7 @@ module Kounta
 		has_one :site, Kounta::Site, {:company_id => :id}, lambda { |klass, item_id| {companies: klass.id, sites: item_id} }
 		has_one :price_list, Kounta::PriceList, {:company_id => :id}, lambda { |klass, item_id| {companies: klass.id, price_lists: item_id} }
 		has_one :tax, Kounta::Tax, {:company_id => :id}, lambda { |klass, item_id| {companies: klass.id, taxes: item_id} }
+		has_one :order, Kounta::Order, {:company_id => :id}, lambda { |klass, item_id| {companies: klass.id, orders: item_id} }
 
 		has_many :products, Kounta::Product, {:company_id => :id}, lambda { |klass| {companies: klass.id, products: nil} }
 		has_many :categories, Kounta::Category, {:company_id => :id}, lambda { |klass| {companies: klass.id, categories: nil} }
@@ -31,6 +32,7 @@ module Kounta
 		has_many :sites, Kounta::Site, {:company_id => :id}, lambda { |klass| {companies: klass.id, sites: nil} }
 		has_many :price_lists, Kounta::PriceList, {:company_id => :id}, lambda { |klass| {companies: klass.id, price_lists: nil} }
 		has_many :taxes, Kounta::Tax, {:company_id => :id}, lambda { |klass| {companies: klass.id, taxes: nil} }
+		has_many :orders, Kounta::Order, {:company_id => :id}, lambda { |klass| {companies: klass.id, orders: nil} }
 
 		def initialize(hash={})
 			if hash.empty?

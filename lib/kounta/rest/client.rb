@@ -37,10 +37,8 @@ module Kounta
 					raise Kounta::Errors::APIError.new(ex.message)
 				end
 				
-				if response
-					log("Response: #{response.parsed}")
-					response.parsed
-				end
+				log("Response: #{response.parsed}")
+				response.parsed
 			end
 
 			def objects_from_response(klass, request_method, url_hash, options={})
