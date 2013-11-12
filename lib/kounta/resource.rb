@@ -74,7 +74,7 @@ module Kounta
 		end
 
 		def ignored_properties(array=[])
-			array + [:created_at, :updated_at, :id, :company_id, :site_id]
+			array + [:created_at, :updated_at, :id, :company_id]
 		end
 
 		private
