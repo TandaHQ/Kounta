@@ -22,6 +22,7 @@ module Kounta
 	TOKEN_URI = "https://api.kounta.com/v1/token.json"
 	SITE_URI = "https://api.kounta.com/v1/"
 	FORMAT = :json
+	REQUEST_HEADERS = {'Content-Type' => 'application/json'}
 
 	def self.log(message)
 
