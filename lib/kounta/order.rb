@@ -4,6 +4,7 @@ module Kounta
 		property :company_id
 		property :status
 		property :customer
+		property :customer_id
 		property :register_id
 		property :site_id
 		property :lines
