@@ -29,4 +29,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "oauth2", "0.9.2"
   spec.add_dependency "pry", "0.9.12.2"
   spec.add_dependency "yell", "1.5.1"
+  spec.add_dependency "faraday_middleware", "0.9.0"
 end

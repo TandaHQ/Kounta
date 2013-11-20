@@ -1,6 +1,6 @@
 require 'oauth2'
-require 'yell'
 require 'oj'
+require 'faraday_middleware'
 
 module Kounta
 	module REST
@@ -8,9 +8,7 @@ module Kounta
 
 			def initialize
 				raise Kounta::Errors::MissingOauthDetails unless has_required_oauth_details?
-				@logger = Yell.new STDOUT
 				@conn = OAuth2::AccessToken.new(client, Kounta.client_token, {:refresh_token => Kounta.client_refresh_token})
-
 			end
 
 			def client
@@ -18,7 +16,12 @@ module Kounta
 					:site => Kounta::SITE_URI,
 					:authorize_url => Kounta::AUTHORIZATION_URI,
 					:token_url => Kounta::TOKEN_URI
-				})
+				}) do |faraday|
+					faraday.request :json
+					faraday.use Faraday::Request::UrlEncoded
+					faraday.use Faraday::Response::Logger if Kounta.enable_logging
+					faraday.adapter Faraday.default_adapter
+				end
 			end
 
 			def path_from_hash(url_hash)
@@ -30,11 +33,11 @@ module Kounta
 				options[:headers].merge!(Kounta::REQUEST_HEADERS)
 
 				begin
-					log("#{request_method}: #{Kounta::SITE_URI}#{path_from_hash(url_hash)}.#{FORMAT.to_s}")
-					response = @conn.request(request_method, "#{path_from_hash(url_hash)}.#{FORMAT.to_s}", options)
+					response = @conn.request(request_method, "#{path_from_hash(url_hash)}.#{FORMAT.to_s}", options) do |request|
+
+					end
 				rescue OAuth2::Error => ex
 					if ex.message.include? 'The access token provided has expired'
-						log(ex.message)
 						@conn = refreshed_token
 						retry
 					end
@@ -69,10 +72,6 @@ module Kounta
 
 				def has_required_oauth_details?
 					Kounta.client_id && Kounta.client_secret && Kounta.client_token && Kounta.client_refresh_token
-				end
-
-				def log(message)
-					@logger.info(message) unless !Kounta.enable_logging
 				end
 
 				def refreshed_token
