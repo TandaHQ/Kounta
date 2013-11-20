@@ -29,13 +29,8 @@ module Kounta
 			end
 
 			def perform(url_hash, request_method, options={})
-				options[:headers] ||= {}
-				options[:headers].merge!(Kounta::REQUEST_HEADERS)
-
 				begin
-					response = @conn.request(request_method, "#{path_from_hash(url_hash)}.#{FORMAT.to_s}", options) do |request|
-
-					end
+					response = @conn.request(request_method, "#{path_from_hash(url_hash)}.#{FORMAT.to_s}", options)
 				rescue OAuth2::Error => ex
 					if ex.message.include? 'The access token provided has expired'
 						@conn = refreshed_token
@@ -43,7 +38,6 @@ module Kounta
 					end
 					raise Kounta::Errors::APIError.new(ex.message)
 				end
-
 				response
 			end
 
