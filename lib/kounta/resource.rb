@@ -61,10 +61,8 @@ module Kounta
 
 		def save!
 			response = new? ? client.perform(resource_path, :post, {:body => to_hash}) : client.perform(resource_path, :put, {:body => to_hash})
-			if response
-				response.each_pair do |k,v|
-					self[k] = v
-				end
+			response.parsed.each_pair do |k,v|
+				self[k] = v
 			end
 			self
 		end

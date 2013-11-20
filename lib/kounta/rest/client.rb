@@ -26,9 +26,12 @@ module Kounta
 			end
 
 			def perform(url_hash, request_method, options={})
+				options[:headers] ||= {}
+				options[:headers].merge!(Kounta::REQUEST_HEADERS)
+
 				begin
-					log("#{request_method}: #{Kounta::SITE_URI}#{path_from_hash(url_hash)}.#{FORMAT.to_s} (#{Oj.dump(options[:body], mode: :compat)})")
-					response = @conn.request(request_method, "#{path_from_hash(url_hash)}.#{FORMAT.to_s}", options.merge(REQUEST_HEADERS))
+					log("#{request_method}: #{Kounta::SITE_URI}#{path_from_hash(url_hash)}.#{FORMAT.to_s}")
+					response = @conn.request(request_method, "#{path_from_hash(url_hash)}.#{FORMAT.to_s}", options)
 				rescue OAuth2::Error => ex
 					if ex.message.include? 'The access token provided has expired'
 						log(ex.message)
@@ -37,17 +40,29 @@ module Kounta
 					end
 					raise Kounta::Errors::APIError.new(ex.message)
 				end
-				
-				log("Response: #{response.parsed}")
-				response.parsed
+
+				response
 			end
 
 			def objects_from_response(klass, request_method, url_hash, options={})
-				perform(url_hash, request_method, options).map { |response| klass.new(response) }
+				response = perform(url_hash, request_method, options)
+				page_count = response.headers["x-pages"].to_i
+
+				if page_count > 1
+					results = []
+					page_count.times { |page_number|
+						response = perform(url_hash, request_method, options.merge!(:headers => {'X-Page' => (page_number).to_s}))
+						results = results + response.parsed
+					}
+					results.map { |item| klass.new(item) }
+				else
+					response.parsed.map { |item| klass.new(item) }
+				end
 			end
 
 			def object_from_response(klass, request_method, url_hash, options={})
-				klass.new( perform(url_hash, request_method, options) )
+				response = perform(url_hash, request_method, options)
+				klass.new(response.parsed)
 			end
 
 			private

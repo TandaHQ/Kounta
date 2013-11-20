@@ -36,7 +36,7 @@ module Kounta
 
 		def initialize(hash={})
 			if hash.empty?
-				response = client.perform({:companies => "me"}, :get)
+				response = client.perform({:companies => "me"}, :get).parsed
 				super(response)
 			else
 				super(hash)
