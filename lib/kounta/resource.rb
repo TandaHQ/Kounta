@@ -61,13 +61,16 @@ module Kounta
 
 		def save!
 			response = new? ? client.perform(resource_path, :post, {:body => to_hash}) : client.perform(resource_path, :put, {:body => to_hash})
-			puts "--- response was"
-			puts response.inspect
-			puts "--- response parsed"
-			puts response.parsed.inspect
+
+			# automatically follow redirects to resources
+			if response.status == 201
+				response = client.perform(response.headers["location"], :get)
+			end
+
 			response.parsed.each_pair do |k,v|
 				self[k] = v
 			end
+
 			self
 		end
 
