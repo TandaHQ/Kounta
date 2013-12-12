@@ -13,6 +13,7 @@ module Kounta
 		property :cost_price
 		property :taxes
 		property :sites
+		property :number
 
 		has_many :categories, Kounta::Category, {:company_id => :company_id}, lambda { |klass| {companies: klass.company_id, products: klass.id, categories: nil} }
 		coerce_key :taxes, Kounta::Tax
