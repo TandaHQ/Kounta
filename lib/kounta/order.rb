@@ -17,6 +17,7 @@ module Kounta
 		property :paid
 		property :product
 		property :sale_number
+		property :price_variation
 
 		coerce_key :lines, Kounta::Line
 		coerce_key :payments, Kounta::Payment
