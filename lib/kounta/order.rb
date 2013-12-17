@@ -18,6 +18,7 @@ module Kounta
 		property :product
 		property :sale_number
 		property :price_variation
+		property :lock
 
 		coerce_key :lines, Kounta::Line
 		coerce_key :payments, Kounta::Payment
@@ -30,8 +31,8 @@ module Kounta
 
 		def to_hash
 			returning = {}
-			returning[:lines] = lines.map {|line| line.to_hash } if lines
-			returning[:payments] = payments.map {|payment| payment.to_hash } if payments
+			returning[:lines] = lines.map {|line| line.to_hash } if lines && lines.length > 0
+			returning[:payments] = payments.map {|payment| payment.to_hash } if payments && payments.length > 0
 			super(returning)
 		end
 
