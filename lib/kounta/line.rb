@@ -11,6 +11,7 @@ module Kounta
 		property :product
 		property :unit_price
 		property :unit_tax
+		property :modifiers
 
 		coerce_key :product, Kounta::Product
 
