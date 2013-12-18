@@ -40,7 +40,7 @@ module Kounta
 						@conn = refreshed_token
 						retry
 					end
-					raise Kounta::Errors::APIError.new(ex.message)
+					#raise Kounta::Errors::APIError.new(ex.message)
 				end
 				response
 			end
