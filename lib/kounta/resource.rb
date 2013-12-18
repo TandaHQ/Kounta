@@ -38,7 +38,7 @@ module Kounta
 			if hash
 				hash.each_pair do |k,v|
 					begin
-						self[k] = v
+						self[k] = v if self.respond_to? k.to_sym
 					rescue NoMethodError => e
 						raise Kounta::Errors::UnknownResourceAttribute.new("Unknown attribute: #{k} on resource #{self.class}")
 					end
@@ -68,7 +68,7 @@ module Kounta
 			end
 
 			response.parsed.each_pair do |k,v|
-				self[k] = v
+				self[k] = v if self.respond_to? k.to_sym
 			end
 
 			self

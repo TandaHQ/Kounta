@@ -18,7 +18,7 @@ module Kounta
 		property :product
 		property :sale_number
 		property :price_variation
-		property :lock
+		#property :lock
 
 		coerce_key :lines, Kounta::Line
 		coerce_key :payments, Kounta::Payment
@@ -31,8 +31,8 @@ module Kounta
 
 		def to_hash
 			returning = {}
-			returning[:lines] = lines.map {|line| line.to_hash } if lines && lines.length > 0
-			returning[:payments] = payments.map {|payment| payment.to_hash } if payments && payments.length > 0
+			#returning[:lines] = lines.map {|line| line.to_hash } if lines && lines.length > 0
+			#returning[:payments] = payments.map {|payment| payment.to_hash } if payments && payments.length > 0
 			super(returning)
 		end
 
@@ -42,7 +42,7 @@ module Kounta
 
 		# we manually map these
 		def ignored_properties
-			super([:lines, :payments])
+			super([:lines, :payments, :lock, :site_id])
 		end
 
 	end
