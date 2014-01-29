@@ -23,11 +23,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 2.14"
   spec.add_development_dependency "simplecov", "0.7.1"
   spec.add_development_dependency "webmock", "1.13.0"
+  spec.add_development_dependency "pry", "0.9.12.2"
 
-  spec.add_dependency "oj", "~> 2.1.4"
-  spec.add_dependency "hashie", "~> 2.0.5"
-  spec.add_dependency "oauth2", "0.9.2"
-  spec.add_dependency "pry", "0.9.12.2"
-  spec.add_dependency "yell", "1.5.1"
-  spec.add_dependency "faraday_middleware", "0.9.0"
+  spec.add_dependency "oj", "~> 2"
+  spec.add_dependency "hashie", "~> 2"
+  spec.add_dependency "oauth2", "~> 0.9"
+  spec.add_dependency "faraday_middleware", "~> 0.9"
 end

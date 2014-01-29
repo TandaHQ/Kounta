@@ -15,10 +15,12 @@ require_relative "kounta/register"
 require_relative "kounta/price_list"
 require_relative "kounta/inventory"
 require_relative "kounta/site"
+require_relative "kounta/staff"
+
+# require this one last as it depends on the rest
 require_relative "kounta/company"
 
 module Kounta
-
 	AUTHORIZATION_URI = "https://my.kounta.com/authorize"
 	TOKEN_URI = "https://api.kounta.com/v1/token.json"
 	SITE_URI = "https://api.kounta.com/v1/"

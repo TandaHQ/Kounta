@@ -6,6 +6,8 @@ module Kounta
 	class Resource < Hashie::Dash
 		include Hashie::Extensions::Coercion
 
+		attr_accessor :client
+
 		property :id
 		property :created_at
 		property :updated_at
@@ -44,10 +46,6 @@ module Kounta
 					end
 				end
 			end
-		end
-
-		def client
-			@@client ||= Kounta::REST::Client.new
 		end
 
 		def to_hash(hash={})

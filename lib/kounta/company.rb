@@ -14,6 +14,7 @@ module Kounta
 		property :timezone
 		property :sites
 		property :registers
+		property :staff
 		property :email
 
 		has_one :product, Kounta::Product, {:company_id => :id}, lambda { |klass, item_id| {companies: klass.id, products: item_id} }
@@ -25,6 +26,7 @@ module Kounta
 		has_one :tax, Kounta::Tax, {:company_id => :id}, lambda { |klass, item_id| {companies: klass.id, taxes: item_id} }
 		has_one :order, Kounta::Order, {:company_id => :id}, lambda { |klass, item_id| {companies: klass.id, orders: item_id} }
 		has_one :register, Kounta::Register, {:company_id => :id}, lambda { |klass, item_id| {companies: klass.id, registers: item_id} }
+		has_one :employee, Kounta::Staff, {:company_id => :id}, lambda { |klass, item_id| {companies: klass.id, staff: item_id} }
 
 		has_many :products, Kounta::Product, {:company_id => :id}, lambda { |klass| {companies: klass.id, products: nil} }
 		has_many :categories, Kounta::Category, {:company_id => :id}, lambda { |klass| {companies: klass.id, categories: nil} }
@@ -35,8 +37,11 @@ module Kounta
 		has_many :taxes, Kounta::Tax, {:company_id => :id}, lambda { |klass| {companies: klass.id, taxes: nil} }
 		has_many :orders, Kounta::Order, {:company_id => :id}, lambda { |klass| {companies: klass.id, orders: nil} }
 		has_many :registers, Kounta::Register, {:company_id => :id}, lambda { |klass| {companies: klass.id, registers: nil} }
+		has_many :employees, Kounta::Staff, {:company_id => :id}, lambda { |klass| {companies: klass.id, staff: nil} }
 
-		def initialize(hash={})
+		def initialize(client, hash = {})
+			@client = client
+
 			if hash.empty?
 				response = client.perform({:companies => "me"}, :get).parsed
 				super(response)

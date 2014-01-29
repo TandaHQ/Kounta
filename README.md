@@ -20,22 +20,44 @@ Or install it yourself as:
 
     require 'kounta'
 
-Then add your API details / other configuration options
+### Multi-legged OAuth
 
-    Kounta.configure do |config|
-        config.client_id = "abcd1234"
-        config.client_secret = "abcd1234"
-        config.client_token = "abcd1234"
-        config.client_refresh_token = "abcd1234"
+If you've already got an OAuth access token, feel free to skip to API Client Setup.
+
+The Kounta API uses 3 legged OAuth2. Here's an example controller you can use to authenticate:
+
+    class KountaSessionController  
+      def new
+        redirect_to kounta_client.get_access_code_url
+      end
+
+      def create
+        kounta_client.get_access_token(params[:code])
+        kounta_client.company.sites # start loading data from the client
+      end
+
+      def kounta_client
+        @kounta_client ||= Kounta::REST::Client.new({
+          :redirect_url => YOUR_REDIRECT_URL,
+          :consumer => {
+            :key    => YOUR_CONSUMER_KEY,
+            :secret => YOUR_CONSUMER_SECRET,
+          },
+        })
+      end
     end
 
-You may also enable / disable logging (disabled by default)
+### API Client Setup
 
-    config.enable_logging = true
+Use the gem by creating a Kounta client:
 
-Use the gem by creating a Kounta company object:
-
-    company = Kounta::Company.new
+    company = Kounta::REST::Client.new({
+          :consumer => {
+            :key    => YOUR_CONSUMER_KEY,
+            :secret => YOUR_CONSUMER_SECRET,
+          },
+          :access_token => YOUR_OAUTH_ACCESS_TOKEN
+        }).company
 
 This will automatically download data about the company associated with your authentication details.
 
@@ -47,22 +69,7 @@ For the products belonging to a site
 
     sites.first.products
 
-Please see the test sweet for full details of these.
-
-### Console
-
-To aid debugging their is an interactive console. To get started, you'll need to create a "tokens.yml" file in the root of gem, like:
-
-    client_id: abcd1234
-    client_secret: abcd1234
-    client_token: abcd1234
-    client_refresh_token: abcd1234
-
-Then run:
-
-    ruby console.rb
-
-Get started by creating a Kounta::Company object (see above for detailed usage).
+Please see the test suite for full details of these.
 
 ## Contributing
 

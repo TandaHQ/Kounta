@@ -5,12 +5,46 @@ require 'faraday_middleware'
 module Kounta
 	module REST
 		class Client
+      def initialize(options)
+        @redirect_uri         = options[:redirect_uri]
+        @consumer             = options[:consumer]
+        @access_token         = options[:access_token]
+        @refresh_token        = options[:refresh_token]
+        @client               = OAuth2::Client.new(@consumer[:key], @consumer[:secret], {
+					:site => Kounta::SITE_URI,
+					:authorize_url => Kounta::AUTHORIZATION_URI,
+					:token_url => Kounta::TOKEN_URI
+        }) do |faraday|
+					faraday.request :json
+					faraday.use Faraday::Request::UrlEncoded
+					faraday.use Faraday::Response::Logger if Kounta.enable_logging
+					faraday.adapter Faraday.default_adapter
+				end
+      end
 
-			def initialize
-				raise Kounta::Errors::MissingOauthDetails unless has_required_oauth_details?
-				@conn = OAuth2::AccessToken.new(client, Kounta.client_token, {:refresh_token => Kounta.client_refresh_token})
-			end
+      def authenticated?
+        @access_token.present?
+      end
 
+      def get_access_code_url(params = {})
+      	# Kounta's API seems to require the `state` param (can't find documentation on it anywhere)
+      	# learn more about it: http://homakov.blogspot.com.au/2012/07/saferweb-most-common-oauth2.html
+        @client.auth_code.authorize_url(params.merge(redirect_uri: @redirect_uri, state: SecureRandom.hex(24)))
+      end
+
+      def get_access_token(access_code)
+        @token = @client.auth_code.get_token(access_code, redirect_uri: @redirect_uri)
+        @access_token = @token.token
+        @expires_at = @token.expires_at
+        @refresh_token = @token.refresh_token
+        @token
+      end
+
+      def company(hash = {})
+      	@company ||= Kounta::Company.new(self, hash)
+      end
+
+=begin
 			def client
 				@oauth_client ||= OAuth2::Client.new(Kounta.client_id, Kounta.client_secret, {
 					:site => Kounta::SITE_URI,
@@ -23,6 +57,7 @@ module Kounta
 					faraday.adapter Faraday.default_adapter
 				end
 			end
+=end
 
 			def path_from_hash(url_hash)
 				url_hash.map{ |key, value| value ? "#{key}/#{value}" : "#{key}" }.join('/')
@@ -31,13 +66,13 @@ module Kounta
 			def perform(url_hash, request_method, options={})
 				begin
 					if url_hash.kind_of? Hash
-						response = @conn.request(request_method, "#{path_from_hash(url_hash)}.#{FORMAT.to_s}", options)
+						response = oauth_connection.request(request_method, "#{path_from_hash(url_hash)}.#{FORMAT.to_s}", options)
 					else
-						response = @conn.request(request_method, url_hash, options)
+						response = oauth_connection.request(request_method, url_hash, options)
 					end
 				rescue OAuth2::Error => ex
 					if ex.message.include? 'The access token provided has expired'
-						@conn = refreshed_token
+						@auth_connection = refreshed_token
 						retry
 					end
 					
@@ -69,12 +104,18 @@ module Kounta
 
 			private
 
-				def has_required_oauth_details?
-					Kounta.client_id && Kounta.client_secret && Kounta.client_token && Kounta.client_refresh_token
+				def oauth_connection
+	        if @refresh_token
+	          @auth_connection ||= OAuth2::AccessToken.new(@client, @access_token, {
+	            :refresh_token => @refresh_token
+	          }).refresh!
+	        else
+	          @auth_connection ||= OAuth2::AccessToken.new(@client, @access_token)
+	        end
 				end
 
 				def refreshed_token
-					OAuth2::AccessToken.from_hash(client, :refresh_token => Kounta.client_refresh_token).refresh!
+					OAuth2::AccessToken.from_hash(@client, :refresh_token => @refresh_token).refresh!
 				end
 
 		end
