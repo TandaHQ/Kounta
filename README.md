@@ -32,7 +32,7 @@ The Kounta API uses 3 legged OAuth2. Here's an example controller you can use to
       end
 
       def create
-        kounta_client.get_access_token(params[:code])
+        token = kounta_client.get_access_token(params[:code])
         kounta_client.company.sites # start loading data from the client
       end
 
