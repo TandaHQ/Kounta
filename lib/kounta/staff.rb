@@ -20,7 +20,6 @@ module Kounta
 			"#{first_name} #{last_name}"
 		end
 
-		has_many :shifts, Kounta::Shift, {:company_id => :company_id}, Proc.new { |klass, date| {companies: klass.company_id, staff: klass.id, shifts: Kounta.format_date(date)} }
 		has_many :shifts_since, Kounta::Shift, {:company_id => :company_id}, Proc.new { |klass, date| {companies: klass.company_id, staff: klass.id, shifts: nil, since: Kounta.format_date(date)} }
 
 		def resource_path

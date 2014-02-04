@@ -33,7 +33,6 @@ module Kounta
 		has_many :addresses, Kounta::Address, {:company_id => :company_id}, Proc.new { |klass| {companies: klass.company_id, sites: klass.id, addresses: nil} }
 		has_many :orders, Kounta::Order, {:company_id => :company_id}, Proc.new { |klass| {companies: klass.company_id, sites: klass.id, orders: nil} }
 		has_many :inventory, Kounta::Inventory, {:company_id => :company_id}, Proc.new { |klass| {companies: klass.company_id, sites: klass.id, inventory: nil} }
-		has_many :shifts, Kounta::Shift, {:company_id => :company_id}, Proc.new { |klass, date| {companies: klass.company_id, sites: klass.id, shifts: Kounta.format_date(date)} }
 		has_many :shifts_since, Kounta::Shift, {:company_id => :company_id}, Proc.new { |klass, date| {companies: klass.company_id, sites: klass.id, shifts: nil, since: Kounta.format_date(date)} }
 
 		def resource_path
