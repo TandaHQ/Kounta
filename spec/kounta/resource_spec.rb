@@ -5,8 +5,8 @@ describe Kounta::Resource do
 	subject { Kounta::Resource }
 
 	before :each do
-		subject.has_one(:address, Kounta::Address, {:company_id => :id}, lambda { |klass, item_id| {companies: klass.id, addresses: item_id} })
-		subject.has_many :addresses, Kounta::Address, {:company_id => :id}, lambda { |klass| {companies: klass.id, addresses: nil} }
+		subject.has_one(:address, Kounta::Address, {:company_id => :id}, Proc.new { |klass, item_id| {companies: klass.id, addresses: item_id} })
+		subject.has_many :addresses, Kounta::Address, {:company_id => :id}, Proc.new { |klass| {companies: klass.id, addresses: nil} }
 		@instance = subject.new({:id => 345})
 	end
 
@@ -74,7 +74,7 @@ describe Kounta::Resource do
 		subject.property :price_variation
 		instance = subject.new
 		instance.id = nil
-		instance.define_singleton_method :resource_path, lambda { {companies: 162, orders: 6789, lines: nil} }
+		instance.define_singleton_method :resource_path, Proc.new { {companies: 162, orders: 6789, lines: nil} }
 		instance.save!.should be_an_instance_of subject
 		WebMock.should have_requested(:post, group_endpoint('lines'))
 	end
@@ -87,7 +87,7 @@ describe Kounta::Resource do
 		subject.property :price_variation
 		instance = subject.new
 		instance.id = 162
-		instance.define_singleton_method :resource_path, lambda { {companies: 162, orders: 6789, lines: 2345} }
+		instance.define_singleton_method :resource_path, Proc.new { {companies: 162, orders: 6789, lines: 2345} }
 		instance.save!.should be_an_instance_of subject
 		WebMock.should have_requested(:put, singular_endpoint('lines'))
 	end

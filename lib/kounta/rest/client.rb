@@ -60,7 +60,8 @@ module Kounta
 =end
 
 			def path_from_hash(url_hash)
-				url_hash.map{ |key, value| value ? "#{key}/#{value}" : "#{key}" }.join('/')
+        # TODO: there's probably a more correct way of doing this encoding
+				url_hash.map{ |key, value| value ? "#{key}/#{value.to_s.gsub("-", "%2D")}" : "#{key}" }.join('/')
 			end
 
 			def perform(url_hash, request_method, options={})

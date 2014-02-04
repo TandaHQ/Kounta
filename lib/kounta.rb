@@ -14,6 +14,8 @@ require_relative "kounta/customer"
 require_relative "kounta/register"
 require_relative "kounta/price_list"
 require_relative "kounta/inventory"
+require_relative "kounta/break"
+require_relative "kounta/shift"
 require_relative "kounta/site"
 require_relative "kounta/staff"
 
@@ -25,6 +27,10 @@ module Kounta
 	TOKEN_URI = "https://api.kounta.com/v1/token.json"
 	SITE_URI = "https://api.kounta.com/v1/"
 	FORMAT = :json
+
+	def self.format_date(date)
+		date.respond_to?(:strftime) ? date.strftime("%Y-%m-%d") : date.to_s
+	end
 
 	def self.log(message)
 

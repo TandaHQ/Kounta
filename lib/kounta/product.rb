@@ -15,7 +15,7 @@ module Kounta
 		property :sites
 		property :number
 
-		has_many :categories, Kounta::Category, {:company_id => :company_id}, lambda { |klass| {companies: klass.company_id, products: klass.id, categories: nil} }
+		has_many :categories, Kounta::Category, {:company_id => :company_id}, Proc.new { |klass| {companies: klass.company_id, products: klass.id, categories: nil} }
 		coerce_key :taxes, Kounta::Tax
 
 		def tags_include?(name)
