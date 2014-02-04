@@ -83,6 +83,7 @@ module Kounta
 		private
 
 			def assign_into(klass, assigner, assignments)
+				klass.client = assigner.client
 				assignments.each_pair do |k,v|
 					klass[k] = assigner[v]
 				end
