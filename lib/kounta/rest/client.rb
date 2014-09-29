@@ -44,21 +44,6 @@ module Kounta
       	@company ||= Kounta::Company.new(self, hash)
       end
 
-=begin
-			def client
-				@oauth_client ||= OAuth2::Client.new(Kounta.client_id, Kounta.client_secret, {
-					:site => Kounta::SITE_URI,
-					:authorize_url => Kounta::AUTHORIZATION_URI,
-					:token_url => Kounta::TOKEN_URI
-				}) do |faraday|
-					faraday.request :json
-					faraday.use Faraday::Request::UrlEncoded
-					faraday.use Faraday::Response::Logger if Kounta.enable_logging
-					faraday.adapter Faraday.default_adapter
-				end
-			end
-=end
-
 			def path_from_hash(url_hash)
         # TODO: there's probably a more correct way of doing this encoding
 				url_hash.map{ |key, value| value ? "#{key}/#{value.to_s.gsub("-", "%2D")}" : "#{key}" }.join('/')
