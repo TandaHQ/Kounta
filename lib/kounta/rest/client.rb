@@ -69,18 +69,16 @@ module Kounta
 
 			def objects_from_response(klass, request_method, url_hash, options={})
 				response = perform(url_hash, request_method, options)
-				page_count = response.headers["x-pages"].to_i
+				last_page = response.headers["x-pages"].to_i - 1
+				results = response.parsed
 
-				if page_count > 1
-					results = []
-					page_count.times { |page_number|
-						response = perform(url_hash, request_method, options.merge!(:headers => {'X-Page' => (page_number).to_s}))
-						results = results + response.parsed
-					}
-					results.map { |item| klass.new(item) }
-				else
-					response.parsed.map { |item| klass.new(item) }
-				end
+				# Already got page 0, start at page 1
+				(1..last_page).each { |page_number|
+					response = perform(url_hash, request_method, options.merge!(:headers => {'X-Page' => (page_number).to_s}))
+					results = results + response.parsed
+				}
+
+				results.map { |item| klass.new(item) }
 			end
 
 			def object_from_response(klass, request_method, url_hash, options={})
