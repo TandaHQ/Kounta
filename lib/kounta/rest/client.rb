@@ -86,6 +86,72 @@ module Kounta
 				klass.new(response.parsed)
 			end
 
+			def objects_from_response_in_time_range(klass, request_method, url_hash, options={})
+				if options.has_key?(:params) && (options[:params].has_key?(:created_gte) ^ options[:params].has_key?(:created_gt)) &&
+							(options[:params].has_key?(:created_lte) ^ options[:params].has_key?(:created_lt))
+					params = options[:params]
+					start_equal = params.has_key?(:created_gte)
+					finish_equal = params.has_key?(:created_lte)
+					start = (start_equal ? params[:created_gte] : params[:created_gt]).to_time
+					finish = (finish_equal ? params[:created_lte] : params[:created_lt]).to_time
+
+					params.except!(:created_gte, :created_gt, :created_lte, :created_lt)
+
+					start_date = start.to_date
+					finish_date = finish.to_date
+
+					start = start.to_i
+					finish = finish.to_i
+
+					results = []
+
+					options[:params] = params.merge(created_gte: start_date, created_lte: finish_date)
+					response = perform(url_hash, request_method, options)
+					last_page = response.headers["x-pages"].to_i - 1
+					parsed = response.parsed.map{|o| o['created_at_epoch'] = Time.parse(o['created_at']).to_i; o}
+
+					response_start = parsed.last['created_at_epoch']
+					response_finish = parsed.first['created_at_epoch']
+
+					# all current and future responses will be before the required start
+					return results if response_finish < start
+
+					# reverse to order them in ascending order
+					results = results + filter_responses_in_date_range(parsed.reverse, start, finish)
+
+					# all future responses will be before the required start
+					return results if response_start < start
+
+					(1..last_page).each{ |page_number|
+						response = perform(url_hash, request_method, options.merge!(headers: {'X-Page' => (page_number).to_s}))
+						parsed = response.parsed.map{|o| o['created_at_epoch'] = Time.parse(o['created_at']).to_i; o}
+
+						response_start = parsed.last['created_at_epoch']
+						response_finish = parsed.first['created_at_epoch']
+
+						# all current and future responses will be before the required start
+						break if response_finish < start
+
+						# reverse to order them in ascending order
+						results = results + filter_responses_in_date_range(parsed.reverse, start, finish)
+
+						# all future responses will be before the required start
+						break if response_start < start
+					}
+
+					# reverse to under reverses used to order them in ascending order
+					results.reverse.map { |item| klass.new(item) }
+				else
+					raise ArgumentError.new("url_has must contain exactly one of [:created_gte, :created_gt] and exactly one of [:created_lte, :created_lt]")
+				end
+			end
+
+			def filter_responses_in_date_range(parsed_responses, start, finish)
+				start_index = parsed_responses.index {|response| response['created_at_epoch'] >= start} || parsed_responses.length - 1
+				finish_index = parsed_responses.rindex{|response| response['created_at_epoch'] <= finish} || 0
+				parsed_responses[start_index..finish_index]
+			end
+
 			private
 
 				def oauth_connection

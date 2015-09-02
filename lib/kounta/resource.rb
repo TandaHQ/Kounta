@@ -36,6 +36,12 @@ module Kounta
 			end
 		end
 
+		def self.has_many_in_time_range(sym, klass, assignments, route)
+			define_method(sym) do |has_many_params = nil, *args|
+				client.objects_from_response_in_time_range(klass, :get, route.call(self, has_many_params), {:params => args[0]}).map {|returned_klass| assign_into(returned_klass, self, assignments) }
+			end
+		end
+
 		def initialize(hash={})
 			if hash
 				hash.each_pair do |k,v|
