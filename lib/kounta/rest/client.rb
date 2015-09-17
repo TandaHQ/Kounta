@@ -64,6 +64,11 @@ module Kounta
 					
 					#raise Kounta::Errors::APIError.new(ex.message)
 				end
+
+				unless response && response.status == 200
+					raise Kounta::Errors::RequestError.new(response.nil? ? 'Unknown Status' : response.status)
+				end
+
 				response
 			end
 
