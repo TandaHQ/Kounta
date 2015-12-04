@@ -4,6 +4,7 @@ module Kounta
 		property :company_id
 		property :first_name
 		property :last_name
+    property :email
 		property :primary_email_address
 		property :email_addresses
 		property :phone

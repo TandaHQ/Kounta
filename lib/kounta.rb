@@ -18,6 +18,7 @@ require_relative "kounta/break"
 require_relative "kounta/shift"
 require_relative "kounta/site"
 require_relative "kounta/staff"
+require_relative "kounta/webhook"
 
 # require this one last as it depends on the rest
 require_relative "kounta/company"

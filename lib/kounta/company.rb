@@ -16,6 +16,7 @@ module Kounta
 		property :registers
 		property :staff
 		property :email
+    property :webhooks
 
 		has_one :product, Kounta::Product, {:company_id => :id}, Proc.new { |klass, item_id| {companies: klass.id, products: item_id} }
 		has_one :category, Kounta::Category, {:company_id => :id}, Proc.new { |klass, item_id| {companies: klass.id, categories: item_id} }
@@ -27,6 +28,7 @@ module Kounta
 		has_one :order, Kounta::Order, {:company_id => :id}, Proc.new { |klass, item_id| {companies: klass.id, orders: item_id} }
 		has_one :register, Kounta::Register, {:company_id => :id}, Proc.new { |klass, item_id| {companies: klass.id, registers: item_id} }
 		has_one :employee, Kounta::Staff, {:company_id => :id}, Proc.new { |klass, item_id| {companies: klass.id, staff: item_id} }
+    has_one :webhook, Kounta::Webhook, {:company_id => :id}, Proc.new { |klass, item_id| {companies: klass.id, webhooks: item_id} }
 
 		has_many :products, Kounta::Product, {:company_id => :id}, Proc.new { |klass| {companies: klass.id, products: nil} }
 		has_many :categories, Kounta::Category, {:company_id => :id}, Proc.new { |klass| {companies: klass.id, categories: nil} }
@@ -40,6 +42,7 @@ module Kounta
 		has_many :employees, Kounta::Staff, {:company_id => :id}, Proc.new { |klass| {companies: klass.id, staff: nil} }
 		has_many :shifts, Kounta::Shift, {:company_id => :id}, Proc.new { |klass, date| {companies: klass.id, shifts: Kounta.format_date(date)} }
 		has_many :shifts_since, Kounta::Shift, {:company_id => :id}, Proc.new { |klass, date| {companies: klass.id, shifts: nil, since: Kounta.format_date(date)} }
+    has_many :webhooks, Kounta::Webhook, {:company_id => :id}, Proc.new { |klass, item_id| {companies: klass.id, webhooks: nil} }
 
 		def initialize(client, hash = {})
 			@client = client
