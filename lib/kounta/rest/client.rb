@@ -61,12 +61,12 @@ module Kounta
 						@auth_connection = refreshed_token
 						retry
 					end
-					
-					#raise Kounta::Errors::APIError.new(ex.message)
+
+					raise Kounta::Errors::RequestError.new(response.nil? ? 'Unknown Status' : response.status)
 				end
 
-				unless response && response.status == 200
-					raise Kounta::Errors::RequestError.new(response.nil? ? 'Unknown Status' : response.status)
+				unless response
+					raise Kounta::Errors::RequestError.new('Unknown Status')
 				end
 
 				response
