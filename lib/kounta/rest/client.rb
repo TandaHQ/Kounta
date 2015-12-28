@@ -56,8 +56,8 @@ module Kounta
                     else
                         response = oauth_connection.request(request_method, url_hash, options)
                     end
-                rescue OAuth2::Error => ex
-                    if ex.message.include?('The access token provided has expired') || ex.message.include?('expired') || ex.message.include?('invalid')
+                rescue Exception => ex
+                    if !ex.message.nil? && (ex.message.include?('The access token provided has expired') || ex.message.include?('expired') || ex.message.include?('invalid'))
                         @auth_connection = refreshed_token
                         retry
                     end
