@@ -78,6 +78,19 @@ module Kounta
 			self
 		end
 
+		def delete!
+			if new?
+				return self
+			end
+			response = client.perform(resource_path, :delete)
+
+			if response.status == 204
+				self.except!('id', 'created_at', 'updated_at')
+			end
+
+			self
+		end
+
 		def new?
 			!id
 		end
