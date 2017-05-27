@@ -58,7 +58,7 @@ module Kounta
                        oauth_connection.request(request_method, url_hash, options)
                      end
         rescue Exception => ex # rubocop:disable Lint/RescueException
-          msg = ex.msg
+          msg = ex.message
           if !msg.nil? && (msg.include?('The access token provided has expired') || msg.include?('expired') || msg.include?('invalid'))
             @auth_connection = refreshed_token
             retry
