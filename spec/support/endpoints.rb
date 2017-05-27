@@ -24,6 +24,17 @@ module Helpers
   end
 
   def stub_endpoints
+    # token
+    stub_request(:post, group_endpoint('token')).to_return(
+      body: {
+        access_token: 'abcd',
+        refresh_token: 'efgh',
+        expires_in: 3600,
+        token_type: 'Bearer'
+      }.to_json,
+      headers: endpoint_headers
+    )
+
     # create
     stub_request(:post, group_endpoint('products')).to_return(body: load_json_from_fixture('product.json'), headers: endpoint_headers)
     stub_request(:post, group_endpoint('customers')).to_return(body: load_json_from_fixture('customer.json'), headers: endpoint_headers)

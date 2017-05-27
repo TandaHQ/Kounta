@@ -16,7 +16,6 @@ RSpec.configure do |config|
     stub_endpoints
 
     @client = Kounta::REST::Client.new(
-      redirect_uri: nil,
       consumer: {
         key: '1234',
         secret: '5678'

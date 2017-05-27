@@ -1,13 +1,13 @@
 require 'helper'
 
 describe Kounta::Customer do
-  subject { Kounta::Company.new.customer(389_427) }
+  subject { Kounta::Company.new(@client).customer(389_427) }
 
   it 'should have a name' do
-    subject.name.should eq('Samuel Richardson')
+    expect(subject.name).to eq('Samuel Richardson')
   end
 
   it 'should have a resource path' do
-    subject.resource_path.should eq(companies: 162, customers: 389_427)
+    expect(subject.resource_path).to eq(companies: 162, customers: 389_427)
   end
 end

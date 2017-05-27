@@ -5,15 +5,15 @@ describe Kounta do
 
   it 'should be able to call a configure block' do
     subject.configure do |config|
-      config.should be(Kounta)
+      expect(config).to be(Kounta)
     end
   end
 
   it 'should be able to configure logging' do
-    Kounta.enable_logging.should be(false)
+    expect(Kounta.enable_logging).to be(false)
     Kounta.enable_logging = true
-    Kounta.enable_logging.should be(true)
+    expect(Kounta.enable_logging).to be(true)
     Kounta.enable_logging = false
-    Kounta.enable_logging.should be(false)
+    expect(Kounta.enable_logging).to be(false)
   end
 end

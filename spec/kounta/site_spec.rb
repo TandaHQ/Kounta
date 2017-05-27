@@ -1,9 +1,9 @@
 require 'helper'
 
 describe Kounta::Site do
-  subject { Kounta::Company.new.site(985) }
+  subject { Kounta::Company.new(@client).site(985) }
 
   it 'should have a resource path' do
-    subject.resource_path.should eq(companies: 162, sites: 923)
+    expect(subject.resource_path).to eq(companies: 162, sites: 923)
   end
 end

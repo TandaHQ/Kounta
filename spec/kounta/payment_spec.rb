@@ -7,6 +7,6 @@ describe Kounta::Payment do
     subject.company_id = 162
     subject.order_id = 6789
     subject.id = 1
-    subject.resource_path.should eq(companies: 162, orders: 6789, payments: 1)
+    expect(subject.resource_path).to eq(companies: 162, orders: 6789, payments: 1)
   end
 end
