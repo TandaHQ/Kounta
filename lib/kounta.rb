@@ -43,38 +43,6 @@ module Kounta
     yield self
   end
 
-  def self.client_id=(value)
-    @client_id = value
-  end
-
-  def self.client_id
-    @client_id
-  end
-
-  def self.client_secret=(value)
-    @client_secret = value
-  end
-
-  def self.client_secret
-    @client_secret
-  end
-
-  def self.client_token=(value)
-    @client_token = value
-  end
-
-  def self.client_token
-    @client_token
-  end
-
-  def self.client_refresh_token=(value)
-    @client_refresh_token = value
-  end
-
-  def self.client_refresh_token
-    @client_refresh_token
-  end
-
   def self.enable_logging=(value)
     @enable_logging = value
   end

@@ -15,11 +15,14 @@ RSpec.configure do |config|
   config.before(:each) do
     stub_endpoints
 
-    Kounta.configure do |c|
-      c.client_id = '1234'
-      c.client_secret = '5678'
-      c.client_token = 'abcd'
-      c.client_refresh_token = 'efgh'
-    end
+    @client = Kounta::REST::Client.new(
+      redirect_uri: nil,
+      consumer: {
+        key: '1234',
+        secret: '5678'
+      },
+      access_token: 'abcd',
+      refresh_token: 'efgh'
+    )
   end
 end
