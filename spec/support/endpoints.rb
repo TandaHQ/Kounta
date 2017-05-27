@@ -44,6 +44,7 @@ module Helpers
     stub_request(:post, group_endpoint('payments')).to_return(body: load_json_from_fixture('payment.json'), headers: endpoint_headers)
     stub_request(:post, group_endpoint('lines')).to_return(body: load_json_from_fixture('line.json'), headers: endpoint_headers)
     stub_request(:post, group_endpoint('orders')).to_return(body: load_json_from_fixture('order.json'), headers: endpoint_headers)
+    stub_request(:post, group_endpoint('webhooks')).to_return(body: load_json_from_fixture('webhook.json'), headers: endpoint_headers)
 
     # read
     stub_request(:get, singular_endpoint('categories')).to_return(body: load_json_from_fixture('category.json'), headers: endpoint_headers)
@@ -56,6 +57,8 @@ module Helpers
     stub_request(:get, group_endpoint('addresses')).to_return(body: load_json_from_fixture('addresses.json'), headers: endpoint_headers)
     stub_request(:get, singular_endpoint('products')).to_return(body: load_json_from_fixture('product.json'), headers: endpoint_headers)
     stub_request(:get, group_endpoint('products')).to_return(body: load_json_from_fixture('products.json'), headers: endpoint_headers)
+    stub_request(:get, singular_endpoint('registers')).to_return(body: load_json_from_fixture('register.json'), headers: endpoint_headers)
+    stub_request(:get, group_endpoint('registers')).to_return(body: load_json_from_fixture('registers.json'), headers: endpoint_headers)
     stub_request(:get, singular_endpoint('sites')).to_return(body: load_json_from_fixture('site.json'), headers: endpoint_headers)
     stub_request(:get, group_endpoint('sites')).to_return(body: load_json_from_fixture('sites.json'), headers: endpoint_headers)
     stub_request(:get, singular_endpoint('price_lists')).to_return(body: load_json_from_fixture('price_list.json'),
@@ -67,6 +70,8 @@ module Helpers
     stub_request(:get, singular_endpoint('orders')).to_return(body: load_json_from_fixture('order.json'), headers: endpoint_headers)
     stub_request(:get, group_endpoint('orders')).to_return(body: load_json_from_fixture('orders.json'), headers: endpoint_headers)
     stub_request(:get, group_endpoint('inventory')).to_return(body: load_json_from_fixture('inventory.json'), headers: endpoint_headers)
+    stub_request(:get, singular_endpoint('webhooks')).to_return(body: load_json_from_fixture('webhook.json'), headers: endpoint_headers)
+    stub_request(:get, group_endpoint('webhooks')).to_return(body: load_json_from_fixture('webhooks.json'), headers: endpoint_headers)
 
     # update
     stub_request(:put, singular_endpoint('products')).to_return(body: load_json_from_fixture('product.json'), headers: endpoint_headers)
@@ -77,5 +82,6 @@ module Helpers
     stub_request(:put, singular_endpoint('payments')).to_return(body: load_json_from_fixture('payment.json'), headers: endpoint_headers)
     stub_request(:put, singular_endpoint('lines')).to_return(body: load_json_from_fixture('line.json'), headers: endpoint_headers)
     stub_request(:put, singular_endpoint('orders')).to_return(body: load_json_from_fixture('order.json'), headers: endpoint_headers)
+    stub_request(:put, singular_endpoint('webhooks')).to_return(body: load_json_from_fixture('webhook.json'), headers: endpoint_headers)
   end
 end

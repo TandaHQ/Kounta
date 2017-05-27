@@ -9,6 +9,10 @@ describe Kounta do
     end
   end
 
+  it 'should have a version' do
+    expect(Kounta::VERSION).to_not be_nil
+  end
+
   it 'should be able to configure logging' do
     expect(Kounta.enable_logging).to be(false)
     Kounta.enable_logging = true
