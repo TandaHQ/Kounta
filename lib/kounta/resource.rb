@@ -4,6 +4,7 @@ require_relative "rest/client"
 module Kounta
 
 	class Resource < Hashie::Dash
+		include Hashie::Extensions::Dash::IndifferentAccess if defined?(Hashie::Extensions::Dash::IndifferentAccess)
 		include Hashie::Extensions::Coercion
 
 		attr_accessor :client
