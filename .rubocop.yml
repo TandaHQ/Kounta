@@ -1,0 +1,28 @@
+AllCops:
+  DisplayCopNames: true
+  ExtraDetails: true
+
+Metrics/LineLength:
+  Max: 140
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+  - 'spec/**/*'
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false

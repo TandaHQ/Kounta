@@ -6,63 +6,92 @@ Allows easy access to the Kounta POS RESTful API.
 
 Add this line to your application's Gemfile:
 
-    gem 'kounta_rest'
+```ruby
+gem 'kounta_rest'
+```
 
 And then execute:
 
-    $ bundle
+```
+$ bundle
+```
 
 Or install it yourself as:
 
-    $ gem install kounta_rest
+```
+$ gem install kounta_rest
+```
 
 ## Usage
 
-    require 'kounta'
+```ruby
+require 'kounta'
+```
 
-Then add your API details / other configuration options
+### Multi-legged OAuth
 
-    Kounta.configure do |config|
-        config.client_id = "abcd1234"
-        config.client_secret = "abcd1234"
-        config.client_token = "abcd1234"
-        config.client_refresh_token = "abcd1234"
-    end
+If you've already got an OAuth access token, feel free to skip to API Client Setup.
 
-You may also enable / disable logging (disabled by default)
+The Kounta API uses 3 legged OAuth2. Here's an example controller you can use to authenticate:
 
-    config.enable_logging = true
+```ruby
+class KountaSessionController
+  def new
+    redirect_to kounta_client.get_access_code_url
+  end
 
-Use the gem by creating a Kounta company object:
+  def create
+    token = kounta_client.get_access_token(params[:code])
+    kounta_client.company.sites # start loading data from the client
+  end
 
-    company = Kounta::Company.new
+  def kounta_client
+    @kounta_client ||= Kounta::REST::Client.new({
+      :redirect_url => YOUR_REDIRECT_URL,
+      :consumer => {
+        :key    => YOUR_CONSUMER_KEY,
+        :secret => YOUR_CONSUMER_SECRET,
+      },
+    })
+  end
+end
+```
+
+### API Client Setup
+
+Use the gem by creating a Kounta client:
+
+```ruby
+company = Kounta::REST::Client.new({
+  :consumer => {
+    :key    => YOUR_CONSUMER_KEY,
+    :secret => YOUR_CONSUMER_SECRET,
+  },
+  :access_token => YOUR_OAUTH_ACCESS_TOKEN
+}).company
+```
 
 This will automatically download data about the company associated with your authentication details.
 
 From here you can start to fetch relationships of that data, e.g. for all the sites belonging to your company
 
-    sites = company.sites
+```ruby
+sites = company.sites
+```
 
 For the products belonging to a site
 
-    sites.first.products
+```ruby
+sites.first.products
+```
 
-Please see the test sweet for full details of these.
+Please see the test suite for full details of these.
 
-### Console
+## Development
 
-To aid debugging their is an interactive console. To get started, you'll need to create a "tokens.yml" file in the root of gem, like:
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-    client_id: abcd1234
-    client_secret: abcd1234
-    client_token: abcd1234
-    client_refresh_token: abcd1234
-
-Then run:
-
-    ruby console.rb
-
-Get started by creating a Kounta::Company object (see above for detailed usage).
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
