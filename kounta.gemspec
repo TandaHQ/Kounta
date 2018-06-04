@@ -7,14 +7,14 @@ require 'kounta/version'
 Gem::Specification.new do |spec|
   spec.name          = 'kounta_rest'
   spec.version       = Kounta::VERSION
-  spec.authors       = ['Samuel Richardson']
-  spec.email         = ['sam@richardson.co.nz']
+  spec.authors       = ['Samuel Richardson', 'Dave Allie', 'Alex Ghiculescu']
+  spec.email         = %w[sam@richardson.co.nz dave@tanda.co alex@tanda.co]
   spec.description   = "Library for accessing Kounta's RESTful API"
   spec.summary       = "A wrapper around Kounta's RESTful API"
-  spec.homepage      = 'https://github.com/Rodeoclash/Kounta'
+  spec.homepage      = 'https://github.com/TandaHQ/Kounta'
   spec.license       = 'MIT'
 
-  spec.files         = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
+  spec.files         = Dir['lib/**/*'] + %w[LICENSE.txt README.md]
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']

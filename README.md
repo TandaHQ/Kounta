@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/TandaHQ/Kounta.svg?branch=master)](https://travis-ci.org/TandaHQ/Kounta)
+
 # Kounta
 
 Allows easy access to the Kounta POS RESTful API.
