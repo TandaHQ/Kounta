@@ -60,7 +60,7 @@ module Kounta
         rescue Exception => ex # rubocop:disable Lint/RescueException
           msg = ex.message
           if !msg.nil? && (msg.include?('The access token provided has expired') || msg.include?('expired') || msg.include?('invalid'))
-            @auth_connection = refreshed_token
+            @oauth_connection = refreshed_token
             retry
           end
 
@@ -167,11 +167,11 @@ module Kounta
       private
 
       def oauth_connection
-        @auth_connection ||= if @refresh_token
-                               OAuth2::AccessToken.new(@client, @access_token, refresh_token: @refresh_token).refresh!
-                             else
-                               OAuth2::AccessToken.new(@client, @access_token)
-                             end
+        @oauth_connection ||= if @refresh_token
+                                OAuth2::AccessToken.new(@client, @access_token, refresh_token: @refresh_token).refresh!
+                              else
+                                OAuth2::AccessToken.new(@client, @access_token)
+                              end
       end
 
       def refreshed_token

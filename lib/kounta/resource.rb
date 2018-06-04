@@ -20,7 +20,7 @@ module Kounta
       end
     end
 
-    def self.has_one(sym, klass, assignments, route) # rubocop:disable Style/PredicateName
+    def self.has_one(sym, klass, assignments, route) # rubocop:disable Naming/PredicateName
       define_method(sym) do |item_id = nil, *args|
         if item_id
           assign_into(client.object_from_response(klass, :get, route.call(self, item_id), params: args[0]), self, assignments)
@@ -30,14 +30,14 @@ module Kounta
       end
     end
 
-    def self.has_many(sym, klass, assignments, route) # rubocop:disable Style/PredicateName
+    def self.has_many(sym, klass, assignments, route) # rubocop:disable Naming/PredicateName
       define_method(sym) do |has_many_params = nil, *args|
         client.objects_from_response(klass, :get, route.call(self, has_many_params), params: args[0])
               .map { |returned_klass| assign_into(returned_klass, self, assignments) }
       end
     end
 
-    def self.has_many_in_time_range(sym, klass, assignments, route) # rubocop:disable Style/PredicateName
+    def self.has_many_in_time_range(sym, klass, assignments, route) # rubocop:disable Naming/PredicateName
       define_method(sym) do |has_many_params = nil, *args|
         client.objects_from_response_in_time_range(klass, :get, route.call(self, has_many_params), params: args[0])
               .map { |returned_klass| assign_into(returned_klass, self, assignments) }
@@ -69,9 +69,7 @@ module Kounta
       response = new? ? client.perform(resource_path, :post, body: to_hash) : client.perform(resource_path, :put, body: to_hash)
 
       # automatically follow redirects to resources
-      if response.status == 201
-        response = client.perform(response.headers['location'], :get)
-      end
+      response = client.perform(response.headers['location'], :get) if response.status == 201
 
       response.parsed.each_pair do |k, v|
         self[k] = v if respond_to? k.to_sym
