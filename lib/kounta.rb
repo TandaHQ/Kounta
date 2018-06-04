@@ -35,10 +35,6 @@ module Kounta
 
   def self.log(_message); end
 
-  def self.root
-    File.expand_path '../..', __FILE__
-  end
-
   def self.configure
     yield self
   end

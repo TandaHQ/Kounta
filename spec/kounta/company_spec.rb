@@ -5,7 +5,8 @@ describe Kounta::Company do
   subject { Kounta::Company }
 
   it 'should be able to create a company from an existing hash' do
-    subject.new(@client, Oj.load(File.read("#{Kounta.root}/spec/fixtures/companies_me.json")))
+    path = File.expand_path('../fixtures/companies_me.json', __dir__)
+    subject.new(@client, Oj.load(File.read(path)))
   end
 
   it 'should be able to create a company without a hash' do

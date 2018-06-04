@@ -16,7 +16,7 @@ module Helpers
   end
 
   def load_json_from_fixture(filename)
-    File.read("#{Kounta.root}/spec/fixtures/#{filename}")
+    File.read(File.expand_path("../fixtures/#{filename}", __dir__))
   end
 
   def endpoint_headers
