@@ -28,5 +28,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'faraday_middleware', '~> 0.9'
   spec.add_dependency 'hashie', '>= 2', '< 4'
   spec.add_dependency 'oauth2', '~> 1'
-  spec.add_dependency 'oj', '~> 2'
+  spec.add_dependency 'oj', '>= 2', '< 4'
 end
