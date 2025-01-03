@@ -1,5 +1,4 @@
 require 'oauth2'
-require 'oj'
 require 'faraday_middleware'
 
 module Kounta
