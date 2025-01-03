@@ -1,12 +1,11 @@
 require 'helper'
-require 'oj'
 
 describe Kounta::Company do
   subject { Kounta::Company }
 
   it 'should be able to create a company from an existing hash' do
     path = File.expand_path('../fixtures/companies_me.json', __dir__)
-    subject.new(@client, Oj.load(File.read(path)))
+    subject.new(@client, JSON.parse(File.read(path)))
   end
 
   it 'should be able to create a company without a hash' do
