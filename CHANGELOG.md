@@ -8,10 +8,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 ### Changed
+- Switched from OJ gem to Ruby's native JSON library for better performance
 
 ### Fixed
 
 ### Removed
+- Removed OJ gem dependency
 
 
 ## [0.3.0] - 2018-11-28
