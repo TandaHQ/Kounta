@@ -1,5 +1,5 @@
 require 'oauth2'
-require 'faraday_middleware'
+require 'faraday'
 
 module Kounta
   module REST
